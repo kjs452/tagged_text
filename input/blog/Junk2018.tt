@@ -1,0 +1,28 @@
+Blog{
+Title{ RandomText{8} }
+Date{2018-1-12}
+P{ RandomText{100} }
+P{ RandomText{100} }
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2018-2-12}
+P{ RandomText{100} }
+P{ RandomText{10} }
+P{ RandomText{90} }
+P{ RandomText{10} }
+P{ RandomText{10} }
+P{ RandomText{10} }
+}
+
+
+Blog{
+Title{ RandomText{8} }
+Date{2018-3-11}
+P{ RandomText{100} }
+P{ RandomText{100} }
+P{ RandomText{100} }
+}
+

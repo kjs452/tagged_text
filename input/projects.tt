@@ -1,0 +1,85 @@
+include{common.tt}
+
+MySite.top_url{projects}
+MySite.window_title{ AuthorName{}'s Projects }
+
+MySite.side{
+	Heading{
+		Categories
+		Link{Rambles and rants			URL{index.html}}
+		Link{Music, Movies				URL{index.html}}
+		Link{Web Designing				URL{index.html}}
+		Link{Wordpress Themes			URL{index.html}}
+		Link{Free Icons 12-04-6666		URL{index.html}}
+	}
+
+	Heading{
+		Pages and I{more}
+		Link{Rambles and rants			URL{index.html}}
+		Link{Music, Movies				URL{index.html}}
+		Link{Web Designing				URL{index.html}}
+		Link{Wordpress Themes			URL{index.html}}
+		Link{Free						URL{index.html}}
+	}
+
+	Heading{
+		SC{Latest Posts}
+		Link{Rambles and rants			URL{index.html}}
+		Link{Music, Songs				URL{index.html}}
+		Link{Indie Films				URL{index.html}}
+		Link{Wordpress Themes			URL{index.html}}
+		Link{Free						URL{index.html}}
+	}
+}
+
+MySite.body{
+REF{top}
+Title{Projects}
+TitleBox{ RandomText{50} }
+
+Section{TaggedText{}}
+P{ IMGR{photos/pic1.jpg} RandomText{100} }
+
+Section{Conclusion}
+P{ RandomText{100} }
+P{ RandomText{20} }
+P{ RandomText{50} }
+
+Section{ RandomPhrase{5} }
+P{ IMG{photos/pic2.jpg} RandomText{100} }
+P{ RandomText{20} }
+P{ RandomText{50} }
+
+Section{ RandomPhrase{5} }
+P{ RandomText{20} }
+P{ RandomText{50} }
+
+Section{ RandomPhrase{5} }
+IMGC{photos/pic3.jpg}
+P{ RandomText{50} }
+P{ RandomText{20} }
+
+P{
+This is the date of this document GitDate{}. How do you like that?. I STRIKE{love} hate you.
+A NOWRAP{TT{Bob's Burger}} super-set is one in which the OVR{eighen value} is always
+equal to the hyper-cofactor. Its written with the special line on top of it. I encountered
+an issue: B{Hello} UND{There}. Why this not work? How about this, " RandomWords{1} UND{RandomWords{1}}".
+}
+
+LINENUMBERS{
+BlockQuote{ HDBAR{ Code<<_FFF_
+
+
+	Section{ RandomPhrase{5} }
+		IMGC{photos/pic3.jpg}
+	P{ RandomText{50} }
+		P{
+			RandomText{20}
+		}
+
+
+_FFF_
+} }
+}
+
+} //{ MySite.body }

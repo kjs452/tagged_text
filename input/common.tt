@@ -1,0 +1,29 @@
+//{
+//
+// These definitions are common to all web pages.
+// To use this file do this: include{common.tt}
+//
+//}
+
+DEFINE{ AuthorName{Kenny Stauffer} }
+DEFINE{ AuthorEmail{EMAIL@SITE.com} }
+DEFINE{ BirthYear{1975} }
+
+MySite.name{ AuthorName{} }			//{ my super secret alias }
+MySite.email{ AuthorEmail{} }			//{ my email }
+MySite.year{2016 - 2022}				//{ my copyright year thing }
+MySite.lastmodified{ NowDT{} }			//{ gets set to the current date/time whenever static site built }
+
+//{
+//
+//	This defines the top links and their names
+//	Use MySite.top_url\{....\} to make one of these
+//	the "active" onve
+//
+//}
+MySite.top{
+	Item{home		URL{index}}
+	Item{cv		    URL{cv}}
+	Item{projects	URL{projects}}
+	Item{blog		URL{blog}}
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>{{window_title}}</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="Header">
+  <ul id="navigation">
+    {% for item in top %}
+		{% if item.url == top_url %}
+            <li class="active" ><a href="{{item.url}}.html">{{item.text}}</a></li>
+		{% else %}
+            <li><a href="{{item.url}}.html">{{item.text}}</a></li>
+		{% endif %}
+    {% endfor %}
+  </ul>
+</div>
+
+<div id="header2">
+ <div class="logo"><b>{{name}}</b></div>
+  <div class="banner"><b><pre> </pre></b></div>
+</div>
+
+<div id="Content">
+{{ body }}
+</div>
+
+<!-- ********************************************************************** -->
+<div id="Menu">
+	{% for H in side %}
+		<h2>{{H.heading}}</h2>
+		<ul class="subnav">
+		{% for L in H.links %}
+			<li><a href="{{L.url}}">{{L.text}}</a></li>
+		{% endfor %}
+		</ul>
+    {% endfor %}
+</div>
+<!-- ********************************************************************** -->
+
+<div class="spacer">&nbsp;</div>
+
+<div class="footer">
+  <p>Copyright &copy; {{year}} {{name}}<br/>
+  <B>Generated on:</B> {{lastmodified}}
+</div>
+
+</body>
+</html>

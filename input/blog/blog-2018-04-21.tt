@@ -1,0 +1,59 @@
+include{common.tt}
+
+Blog{
+Title{Hi}
+Date{4/21/2018}
+Time{10:10pm}
+P{
+This is my first real blog post. I finally got off my ass and
+wrote the python scripts needed to generate this blog.
+}
+
+}
+
+
+Blog{
+Title{Hello again}
+Date{4/21/2018}
+Time{10:15pm}
+P{
+What does a blog post look like?
+}
+
+}
+
+//{ ********************************************************************** }
+Blog{
+//{This is a comment. }
+
+Title{The Ransack of Tarnack}
+Date{4/21/2018}
+Time{10:30pm}
+
+Section{Introduction}
+TitleBox{ RandomText{35} }
+
+P{
+This is my first HTML test. I am going to see if long
+paragraphs get split nicely in the translated text. I can't
+promise anything. Right now it is cold and turned the heater on //{this is dumb}
+for the first time since last winter. I email my Dad and asked
+Here are 6 random words: " B{I{RandomWords{6}}}".
+about the temp. there up in Canada.
+}
+
+P{Random Phrase begins now: SC{B{RandomPhrase{10}}}. Date now is: NowDT{} }
+
+P{
+Thus begins the second paragraph. I am out of things to say. You
+know a man only has a limited number of keystrokes in their
+lives. What is that number? B{Ed Van Weiren} once said.
+}
+
+SubSection{This is the End}
+P{
+The End.
+}
+
+}
+

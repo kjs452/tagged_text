@@ -1,0 +1,932 @@
+#!/usr/bin/python
+#
+# reads all the blog entries and spits out the blog index
+# and individual blog files
+#
+# See usage() for explaination of what this script does.
+#
+#	Usage: blog_maker	index.tmpl each.tmpl input-dir output-dir
+#
+#
+import os
+import sys
+import re
+import jinja2
+import taggedtext
+import tt_blog_pipeline
+import StringIO
+import mysite
+
+MONTH_NAME = [
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December"
+]
+
+DAYS = {
+	1: "1<sup>st</sup>",
+	2: "2<sup>nd</sup>",
+	3: "3<sup>rd</sup>",
+	4: "4<sup>th</sup>",
+	5: "5<sup>th</sup>",
+	6: "6<sup>th</sup>",
+	7: "7<sup>th</sup>",
+	8: "8<sup>th</sup>",
+	9: "9<sup>th</sup>",
+	10: "10<sup>th</sup>",
+	11: "11<sup>th</sup>",
+	12: "12<sup>th</sup>",
+	13: "13<sup>th</sup>",
+	14: "14<sup>th</sup>",
+	15: "15<sup>th</sup>",
+	16: "16<sup>th</sup>",
+	17: "17<sup>th</sup>",
+	18: "18<sup>th</sup>",
+	19: "19<sup>th</sup>",
+	20: "20<sup>th</sup>",
+	21: "21<sup>st</sup>",
+	22: "22<sup>nd</sup>",
+	23: "23<sup>rd</sup>",
+	24: "24<sup>th</sup>",
+	25: "25<sup>th</sup>",
+	26: "26<sup>th</sup>",
+	27: "27<sup>th</sup>",
+	28: "28<sup>th</sup>",
+	29: "29<sup>th</sup>",
+	30: "30<sup>th</sup>",
+	31: "31<sup>st</sup>",
+}
+
+######################################################################
+#
+# Display command line usage and then quit the program
+#
+def usage(msg):
+	sys.stderr.write("""\
+
+Usage: blog_maker index.tmpl each.tmpl common.tt blog.tt [blog2.tt ...] output-dir
+
+This script rebuild the blog HTML files from the original Tagged{Text} input.
+The HTML files are written to the 'output-dir'
+
+  index.tmpl        - a jinja2 template file to produce a blog index
+  each.tmpl         - a jinja2 template file to produce each blog page
+  common.tt         - defines common web page elements
+  blog.tt, blog2.tt - these files contain the blog entries
+  output-dir        - directory for where the blog files will go
+
+%s
+""" % (msg) )
+
+	exit(1)
+
+######################################################################
+#
+# Return tuple (fhandle, error_string)
+# fhandle is None when error happend and error_string is set
+#		(None, "error")
+#		(filehandle, None)
+#
+# mode must be "r" or "w"
+#
+def my_open(filename, mode):
+	if mode == 'r':
+		if not os.path.exists(filename):
+			return (None, "%s: file doesn't exist" % (filename))
+
+		if not os.path.isfile(filename):
+			return (None, "%s: is not a file" % (filename))
+
+	try:
+		f = open(filename, mode)
+		return (f, None)
+	except:
+		return (None, "%s: exception opening file" % (filename))
+
+######################################################################
+#
+# Count words under 'root'
+#
+def count_words(root):
+	c = 0
+
+	if root.is_word():
+		c += 1
+
+	for child in root.children():
+		c += count_words(child)
+
+	return c
+
+######################################################################
+#
+# parse blog date, handle multiple formats
+#
+
+# m/d/yyyy
+DATE_PAT1 = re.compile( r'^([0-9]+)/([0-9]+)/([0-9][0-9][0-9][0-9])$' )
+
+# yyyy-mm-dd
+DATE_PAT2 = re.compile( r'^([0-9][0-9][0-9][0-9])-([0-9]+)-([0-9]+)$' )
+
+def parse_blog_date(n, rec):
+	rec['date'] = [2018, 4, 11]
+
+	if n.num_children() != 1:
+		e = taggedtext.make_error_node(
+					n.filename(),
+					n.lineno(),
+					n.column(),
+					"Date{} tag expects 1 argument (got %d)" % (n.num_children()))
+		n.morph(e)
+		rec['error'] = True
+		return
+
+	d = n.get_child(0)
+
+	if not d.is_word():
+		e = taggedtext.make_error_node(
+					n.filename(),
+					n.lineno(),
+					n.column(),
+					"expecting Date{} argument to be a word")
+		n.morph(e)
+		rec['error'] = True
+		return
+
+	ds = d.word()
+
+	m = DATE_PAT1.match(ds)
+	if m != None:
+		dv = [0, 0, 0]
+		dv[0] = int(m.group(3))		# years
+		dv[1] = int(m.group(1))		# months
+		dv[2] = int(m.group(2))		# days
+		rec['date'] = dv
+		return
+
+	m = DATE_PAT2.match(ds)
+	if m != None:
+		dv = [0, 0, 0]
+		dv[0] = int(m.group(1))		# years
+		dv[1] = int(m.group(2))		# months
+		dv[2] = int(m.group(3))		# days
+		rec['date'] = dv
+		return
+
+	e = taggedtext.make_error_node(
+				n.filename(),
+				n.lineno(),
+				n.column(),
+				"invalid Date{} format. should be m/d/yyyy or yyyy-mm-dd")
+	n.morph(e)
+	rec['error'] = True
+
+######################################################################
+#
+#
+#
+TIME_PAT = re.compile( r'^([0-9]+):([0-9]+)(:[0-9]+)?((am)|(pm))?$' )
+
+def parse_blog_time(n, rec):
+	rec['time'] = [9, 59, 11]
+
+	if n.num_children() != 1:
+		e = taggedtext.make_error_node(
+					n.filename(),
+					n.lineno(),
+					n.column(),
+					"Time{} tag expects 1 argument (got %d)" % (n.num_children()))
+		n.morph(e)
+		rec['error'] = True
+		return
+
+	t = n.get_child(0)
+
+	if not t.is_word():
+		e = taggedtext.make_error_node(
+					n.filename(),
+					n.lineno(),
+					n.column(),
+					"expecting Time{} argument to be a word")
+		n.morph(e)
+		rec['error'] = True
+		return
+
+	ts = t.word()
+
+	m = TIME_PAT.match(ts)
+	if m == None:
+		e = taggedtext.make_error_node(
+					n.filename(),
+					n.lineno(),
+					n.column(),
+					"invalid Time{} format. should be hh:mm[:ss][am|pm]")
+		n.morph(e)
+		rec['error'] = True
+		return
+
+	tv = [0, 0, 0]
+	tv[0] = int(m.group(1))		# hours
+	tv[1] = int(m.group(2))		# minutes
+
+	if m.group(3) != None:
+		tv[2] = int(m.group(2)[1:])		# seconds (chop the colon)
+	else:
+		tv[2] = 0
+
+	if m.group(4) != None:
+		if m.group(4) == "pm":
+			tv[0] += 12
+
+	rec['time'] = tv
+
+######################################################################
+#
+# process a blog file
+#
+# The minimum Blog entry is:
+#
+#	Blog{
+#	}
+#
+# A title will be derived from first sentence
+# The time field is optional
+# The date field, if absent will be derived from git date
+#
+#	Blog{
+#		Title{I hate bacon now}
+#		Date{2/3/2018}
+#		Time{3:30pm}
+#		P{
+#		Bacon is hard to get these days. Good
+#		bacon, I mean. It is thin and doesn't fry
+#		up very well. The new normal is "thick", as the
+#		the non-thick variety is too thin to be usable.
+#		}
+#	}
+#
+#	Date formats:
+#		yyyy-mm-dd
+#		m/d/yy
+#		m/d/yyyy
+#
+#	Time Formats:
+#		h:mm
+#		hh:mm
+#		hh:mm[am|pm]
+#		hh:mm:ss[am|pm]
+#
+#
+def process_blog_entry(root, blog_database):
+
+	# The key for blog_database shall be a string of this form
+	#		yyyy-mm-dd hh:mm:ss nnn
+	#
+	# sortable chronologically, 'hh' is 24-hours
+	# nnn is a incrementing integer to make the key unique
+	#
+
+	rec = {
+		'title': None,			# Tagged{Text} ROOT Node
+		'date': None,			# [ yyyy, mm, dd ]
+		'time': None,			# [ hh, mm, ss ]  or None
+		'content': None,		# Tagged{Text} ROOT Node
+		'words': 0,				# word count
+		'error': False,			# True if an error occured
+		'pass2_done': False,	# has pass2 processing been applied?
+	}
+
+	rec['content'] = taggedtext.make_root_node_with_filename(root.filename())
+
+	for child in root.children():
+		if child.is_tag_named('Title'):
+			n = taggedtext.make_root_node_with_filename(child.filename())
+			n.take_children(child)
+			rec['title'] = n
+
+		elif child.is_tag_named('Date'):
+			parse_blog_date(child, rec)
+
+		elif child.is_tag_named('Time'):
+			parse_blog_time(child, rec)
+
+		else:
+			rec['content'].add_child_back(child)
+
+	if rec['error']:
+		return [root]
+
+	if rec['date'] == None:
+		n = taggedtext.make_error_node(
+			root.filename(),
+			root.lineno(),
+			root.column(),
+			"Missing Date{} tag" )
+		root.morph(n)
+		return [root]
+
+	if rec['title'] == None:
+		n = taggedtext.make_error_node(
+			root.filename(),
+			root.lineno(),
+			root.column(),
+			"Missing Title{} tag" )
+		root.morph(n)
+		return [root]
+
+	rec['words'] = count_words(root)
+
+	dv = rec['date']
+
+	if rec['time'] != None:
+		tv = rec['time']
+	else:
+		tv = [0, 0, 0]
+
+	n = 0
+	while True:
+		key = '%04d-%02d-%02d %02d:%02d:%02d %03d' % (dv[0], dv[1], dv[2], tv[0], tv[1], tv[2], n)
+		if key not in blog_database:
+			break
+		n += 1
+
+	blog_database[key] = rec
+
+	return []
+
+######################################################################
+#
+# process a blog file
+#
+def process_blog_file(filename, blog_database):
+	ft = my_open(filename, 'r')
+	if ft[0] == None:
+		usage(ft[1])
+
+	f = ft[0]
+	root = taggedtext.parse(f, filename)
+	f.close()
+
+	error_count = root.report_errors(sys.stderr)
+	if error_count > 0:
+		exit(1)
+
+	tt_blog_pipeline.run_pass1(root)
+
+	error_count = root.report_errors(sys.stderr)
+	if error_count > 0:
+		exit(1)
+
+	eval_functions = {
+		'Blog':		(lambda root: process_blog_entry(root, blog_database)),
+	}
+
+	root.eval( eval_functions )
+
+	error_count = root.report_errors(sys.stderr)
+	if error_count > 0:
+		exit(1)	
+
+	#
+	# Apply pass2 blog pipeline to the title and content trees
+	#
+	for bk in blog_database:
+		be = blog_database[bk]
+
+		if be['pass2_done']:
+			continue
+
+		be['pass2_done'] = True
+
+		n = be['title']
+
+		total_words = count_words(n)
+
+		tt_blog_pipeline.run_pass2(n)
+		error_count = n.report_errors(sys.stderr)
+		if error_count > 0:
+			exit(1)
+
+		n = be['content']
+
+		total_words += count_words(n)
+
+		tt_blog_pipeline.run_pass2(n)
+		error_count = n.report_errors(sys.stderr)
+		if error_count > 0:
+			exit(1)
+
+		be['words'] = total_words
+
+######################################################################
+#
+# date_arr is [yyyy, mm, dd]
+# time_arr is [hh, mm, ss]	(24-hour notation), or None
+# Returns:
+#		"January 9th, 2015"
+#		"January 9th, 2015 @ 3:09pm"
+#
+def make_timestamp_string(date_arr, time_arr):
+	ds = "%s %s %d" % (MONTH_NAME[date_arr[1]-1], DAYS[date_arr[2]], date_arr[0])
+
+	result = ds
+
+	if time_arr != None:
+		h = time_arr[0] if time_arr[0] <= 12 else time_arr[0]-12 
+		ampm = "am" if time_arr[0] <= 12 else "pm"
+		ts = "%d:%02d%s" % (h, time_arr[1], ampm)
+
+		result = ds + " @ " + ts
+
+	return result
+
+######################################################################
+#
+# Construct blog filename (excludes .html suffix)
+#
+def bfn(page, total_pages):
+	if page == total_pages:
+		return "blog"
+	else:
+		return "blog-%d" % (page)
+
+######################################################################
+# Constructs the jinja2 data. returns a structure of this  form:
+#
+#	tp = {
+#		'tp': N,		# total pages
+#		'cp': N,		# current page number (1 based)
+#		'entries': [
+#			{
+#				'title': ""		# HTML rendered title
+#				'timestamp': ""		# timestamp info		January 2nd, 2018 at 3:45pm
+#				'body': ""			# HTML rendered blog entry content
+#			},
+#			....
+#		],
+#
+#		'top': [
+#			{
+#				'url': "URL",			# excludes the .html suffix
+#				'text': "text",			# text
+#			}
+#		],
+#
+#		'side': [
+#			{
+#				'heading': "2018",
+#				'links': [
+#					'text': "January (5)",
+#					'url': "blog9.html",
+#				]
+#			}
+#		],
+#
+#		'top_url': "",			# this pages URL. I.e., blog8  (excludes the .html suffix)
+#
+#		'window_title': "",		# Title Bar Title Text
+#
+#		'year':	"2016-2018"		# copyright year shit
+#
+#		'name': "Kenny St."		# my name / alias
+#
+#		'email': "Email"
+#
+#		'lastmodified': "TimeStamp"		# generated on string
+#
+#		'newlines':			"<br><br><br><br><br>",
+#		'older':			"html",		# link to older posts
+#		'newer':			"html",		# link to newer posts
+#	}
+#
+#
+def make_template_parameters(num_pages, curr_page, blog_entries, blog_counts, common_root):
+	tp = {
+		'tp':				str( num_pages ),
+		'cp':				str( curr_page ),
+		'top_url':			bfn(curr_page, num_pages),
+		'side': [ ],
+		'entries': [ ],
+	}
+
+	######################################################################
+	#
+	# Populate 'window_title'
+	#
+	if curr_page != num_pages:
+		d = blog_entries[0]['date']
+		tp['window_title'] = "MySite's Blog - " + MONTH_NAME[d[1]-1] + " " + str(d[0])
+	else:
+		tp['window_title'] = "MySite's Blog"
+
+	######################################################################
+	#
+	# Populate 'email', 'name', 'year', 'lastmodified', 'top' 
+	#
+	x = mysite.get_template_parameters(common_root)
+	if x == None:
+		exit(1)
+
+	tp['email'] = x['email']
+	tp['name'] = x['name']
+	tp['year'] = x['year']
+	tp['lastmodified'] = x['lastmodified']
+	tp['top'] = x['top']
+
+	######################################################################
+	#
+	# Populate 'older'
+	#
+	if curr_page > 1:
+		tp['older'] = '<a href="%s.html">Older Posts</a>' % ( bfn(curr_page-1, num_pages) )
+	else:
+		tp['older'] = ''
+
+
+	######################################################################
+	#
+	# Populate 'newer'
+	#
+	if curr_page < num_pages:
+		tp['newer'] = '<a href="%s.html">Newer Posts</a>' % ( bfn(curr_page+1, num_pages) )
+	else:
+		tp['newer'] = ''
+
+	######################################################################
+	#
+	# populate 'side'
+	#
+	br = 0
+	for ye in blog_counts:
+		se = {
+			'heading': str( ye['year'] ),
+			'links': [ ],
+		}
+
+		for me in ye['months']:
+			le = {
+				'text': ("%s (%d)" % (me['name'], me['count'])),
+				'url': ("%s" % ( bfn(me['page'], num_pages) )),
+			}
+
+			se['links'].append(le)
+			br += 1
+
+		tp['side'].append(se)
+		br += 3
+
+	######################################################################
+	#
+	# populate 'entries'
+	#
+	total_words = 0
+
+	for be in blog_entries:
+
+		e = {
+			'title': "TITLE",
+			'timestamp': "TIMESTAMP",
+			'body': "BODY",
+		}
+
+		ss = StringIO.StringIO()
+		be['title'].write_translated(ss)
+		e['title'] = ss.getvalue().strip()
+
+		ss = StringIO.StringIO()
+		be['content'].write_translated(ss)
+		e['body'] = ss.getvalue().strip()
+
+		e['timestamp'] = make_timestamp_string(be['date'], be['time'])
+
+		tp['entries'].append(e)
+
+		total_words += be['words']
+
+	######################################################################
+	#
+	# Populate 'newlines'
+	#
+	br -= len(blog_entries)*5
+	br -= int( total_words / 50 )
+
+	newlines = ""
+	for i in range(0, br):
+		newlines += "<br>\n"
+
+	tp['newlines'] = newlines
+
+	return tp
+
+######################################################################
+#
+# 1. Assign each blog entry to a page
+#
+# Process the blog entries, constructing:
+#	- reverse time ordering (most recent to oldest)
+#	- assign blog entries to "pages"
+#		- use word count to make pages reasonably sized
+#		- use change of year/month to split new blog page
+#		- assign link references
+#
+# 2. Partition blog entries into individual page arrays
+#
+def make_blog_pages(blog_database):
+
+	######################################################################
+	# 1. Assign pages
+	######################################################################
+	page = 0
+	page_size = 0
+	page_month = 0
+	PAGE_MAX_WORDS = 1000
+
+	for bk in sorted(blog_database, reverse=False):
+		be = blog_database[bk]
+
+		if (page_month != be['date'][1]) or (page_size > PAGE_MAX_WORDS):
+			page_size = 0
+			page += 1
+
+		page_month = be['date'][1]
+
+		page_size += be['words']
+
+		be['page'] = page
+
+	######################################################################
+	# 2. partition blog entries into seperate page arrays
+	######################################################################
+	pages = []
+
+	for page_no in range(0, page):
+		pages.append([])
+
+	for bk in sorted(blog_database, reverse=True):
+		be = blog_database[bk]
+
+		page_idx = be['page'] - 1
+
+		pages[page_idx].append(be)
+
+	return pages
+
+######################################################################
+#
+# build year/month/count
+#
+#	- Array of years. Years sorted from newest to oldest.
+#	- Each year has array of months (from newest to oldest)
+#
+# blog_counts =
+#	[
+#		{
+#			'year': 2018
+#			'count': 32,
+#			'page': 8,
+#			'months': [
+#				{ 'month': 12, 'count': 8, 'page': 4, 'name': "Decemeber" },
+#				{ 'month': 9,  'count': 12 },
+#				{ 'month': 3,  'count': 2 },
+#				{ 'month': 1,  'count': 10 },
+#			]
+#		}
+#	}
+#
+def make_blog_counts(blog_database):
+
+	blog_counts = [ ]
+
+	first = True
+
+	for bk in sorted(blog_database, reverse=True):
+		be = blog_database[bk]
+
+		p = be['page']
+		d = be['date']
+		(y, m) = d[0:2]
+
+		if first or cy != y:
+			first = False
+			cy = y
+			cm = m
+			me = {
+				'month': m,
+				'name': MONTH_NAME[m-1],
+				'count': 0,
+				'page': p,
+			}
+
+			ye = {
+				'year': y,
+				'count': 0,
+				'page': p,
+				'months': [ me ],
+			}
+
+			blog_counts.append(ye)
+
+			cyi = len(blog_counts)-1
+			cmi = 0
+
+		if cm != m:
+			cm = m
+			me = {
+				'page': p,
+				'month': m,
+				'name': MONTH_NAME[m-1],
+				'count': 0,
+			}
+
+			blog_counts[cyi]['months'].append(me)
+			cmi = len(blog_counts[cyi]['months'])-1
+
+		blog_counts[cyi]['count'] += 1
+		blog_counts[cyi]['months'][cmi]['count'] += 1
+
+	return blog_counts
+
+######################################################################
+#
+# MAIN
+#
+def main():
+	if len(sys.argv) < 6:
+		usage("Not enough arguments")
+
+	index_tmpl = sys.argv[1]
+	each_tmpl = sys.argv[2]
+	common_tt = sys.argv[3]
+	output_dir = sys.argv[len(sys.argv)-1]
+
+	input_files = []
+	for i in range(4, len(sys.argv)-1):
+		input_files.append(sys.argv[i])
+
+	#
+	# Check template files
+	#
+	m = re.match(r'^(.*)\.tmpl$', index_tmpl)
+	if m == None:
+		usage("%s: index.tmpl template file must end with .tmpl extension" % (index_tmpl))
+
+	if not os.path.exists(index_tmpl):
+		usage("%s: does not exist" % (index_tmpl))
+
+	if not os.path.isfile(index_tmpl):
+		usage("%s: is not a regular file" % (index_tmpl))
+
+	m = re.match(r'^(.*)\.tmpl$', each_tmpl)
+	if m == None:
+		usage("%s: each.tmpl template file must end with .tmpl extension" % (each_tmpl))
+
+	if not os.path.exists(each_tmpl):
+		usage("%s: does not exist" % (each_tmpl))
+
+	if not os.path.isfile(each_tmpl):
+		usage("%s: is not a regular file" % (each_tmpl))
+
+	#
+	# Check common file
+	#
+	m = re.match(r'^(.*)\.tt$', common_tt)
+	if m == None:
+		usage("%s: common.tt tagged{text} file must end with .tt extension" % (common_tt))
+
+	if not os.path.exists(common_tt):
+		usage("%s: does not exist" % (common_tt))
+
+	if not os.path.isfile(common_tt):
+		usage("%s: is not a regular file" % (common_tt))
+
+	#
+	# Check output directory
+	#
+	if not os.path.isdir(output_dir):
+		usage("%s: output_dir must be a directory" % (output_dir))
+
+	#
+	# Check the input Tagged{Text} blog files
+	#
+	for f in input_files:
+		m = re.match(r'^(.*)\.tt$', f)
+		if m == None:
+			usage("%s: the input.tt files must end with a .tt extension" % (f))
+
+		if not os.path.exists(f):
+			usage("%s: does not exist" % (f))
+
+		if not os.path.isfile(f):
+			usage("%s: is not a regular file" % (f))
+
+	######################################################################
+	#
+	# process common.tt
+	#
+	ft = my_open(common_tt, 'r')
+	if ft[0] == None:
+		usage(ft[1])
+
+	f = ft[0]
+	common_root = taggedtext.parse(f, common_tt)
+	f.close()
+
+	error_count = common_root.report_errors(sys.stderr)
+	if error_count > 0:
+		exit(1)
+
+	tt_blog_pipeline.run_pass1(common_root)
+	tt_blog_pipeline.run_pass2(common_root)
+
+	error_count = common_root.report_errors(sys.stderr)
+	if error_count > 0:
+		exit(1)
+
+	#
+	#
+	#	{
+	#		'byyear':
+	#		{
+	#			'2018':
+	#			{
+	#				'01':
+	#					[ blog1, blog2, blog3, blog4 ]
+	#				'02':
+	#				'03':
+	#				'12':
+	#			}
+	#		},
+	#
+	#		'bymonthyear':
+	#		{
+	#			
+	#		},
+	#
+	#
+	blog_database = { }
+
+	#
+	# Process each input file
+	#
+	for f in input_files:
+		sys.stdout.write("Processing blog file: %s\n" % (f) )
+		process_blog_file(f, blog_database)
+
+	#
+	# Break into pages, and compute counts for indexes 
+	#
+	blog_pages = make_blog_pages(blog_database)
+	blog_counts = make_blog_counts(blog_database)
+
+	######################################################################
+	#
+	# Generate each blog page html file
+	#
+	ft = my_open(each_tmpl, 'r')
+	if ft[0] == None:
+		usage(ft[1])
+
+	f = ft[0]
+
+	template_string = f.read()
+
+	f.close()
+
+	num_pages = len(blog_pages)
+
+	for page_idx in range(0, num_pages):
+		page_no = page_idx + 1
+		page_arr = blog_pages[page_idx]
+
+		page_file = output_dir + "/" + ("%s.html" % ( bfn(page_no, num_pages) ))
+
+		ft = my_open(page_file, 'w')
+		if ft[0] == None:
+			usage(ft[1])
+
+		f = ft[0]
+
+		tp = make_template_parameters(num_pages, page_no, page_arr, blog_counts, common_root)
+
+		template = jinja2.Template(template_string)
+		rendered_string = template.render(tp)
+
+		sys.stdout.write("Generating %s\n" % (page_file) )
+
+		f.write(rendered_string)
+
+######################################################################
+#
+# Start here
+#
+main()

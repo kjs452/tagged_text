@@ -1,0 +1,46 @@
+#!/usr/bin/python
+#
+#
+#
+#
+#
+import taggedtext
+import os
+import sys
+
+######################################################################
+#
+# Usage
+#
+def Usage(msg):
+	sys.stderr.write("""\
+Usage: tt filename
+%s
+
+""" % (msg) )
+
+	exit(1)
+
+######################################################################
+#
+# main
+#
+def main():
+	if len(sys.argv) < 2:
+		Usage("no arguments given")
+	elif len(sys.argv) > 2:
+		Usage("too many arguments given")
+
+	filename = sys.argv[1]
+
+	f = open(filename, 'r')
+
+	node = taggedtext.parse(f, filename)
+
+	f.close()
+
+	node.write_tree(sys.stdout)
+
+	exit(0)
+
+main()

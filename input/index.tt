@@ -1,0 +1,169 @@
+include{common.tt}
+
+MySite.top_url{index}
+MySite.window_title{ AuthorName{}'s Website }
+
+MySite.side{
+	Heading{
+		Categories
+		Link{Rambles and rants			URL{index.html}}
+		Link{Music, Movies				URL{musak.html}}
+		Link{Web Designing				URL{wd.html}}
+		Link{Wordpress Themes			URL{wt.html}}
+		Link{Free Icons B{12-04-6666}	URL{fi6666.html}}
+	}
+
+	Heading{
+		Pages and I{more}
+		Link{Rambles and rants			URL{rar.html}}
+		Link{Music, Movies				URL{mam.html}}
+		Link{Web Designing				URL{wd.html}}
+		Link{Wordpress Themes			URL{wt.html}}
+		Link{Free Music					URL{fm.html}}
+	}
+
+	Heading{
+		SC{Latest Posts}
+		Link{Rambles and rants			URL{rar3.html}}
+		Link{Music, Songs				URL{xxx420.html}}
+		Link{Indie Films				URL{index.html}}
+		Link{Wordpress Themes			URL{index.html}}
+		Link{Free Movies				URL{index.html}}
+	}
+}
+
+MySite.body{
+//{This is a comment. }
+
+Title{The Ransack of Tarnack}
+Section{Introduction}
+TitleBox{ RandomText{35} }
+
+P{
+This is my first HTML test. I am going to see if long
+paragraphs get split nicely in the translated text. I can't
+promise anything. Right now it is cold and turned the heater on //{this is dumb}
+for the first time since last winter. I email my Dad and asked
+Here are 6 random words: " B{I{RandomWords{6}}}".
+about the temp. there up in Canada.
+}
+
+P{Random Phrase begins now: SC{B{RandomPhrase{10}}}. Date now is: NowDT{} }
+
+P{
+Thus begins the second paragraph. I am out of things to say. You
+know a man only has a limited number of keystrokes in their
+lives. What is that number? B{Ed Van Weiren} once said.
+}
+
+SubSection{This is the End}
+P{
+The End.
+}
+
+SubSubSection{Subsection: RandomWords{1}}
+
+include{morestuff.tt}
+
+P{
+No indeed. I must B{CONTINUE} this fucking farce!!! I{Apple Inc.} is one
+of the most fucking corrupt shit companies in the world. So is I{B{Facebook Inc, LLP.}}
+because liberal cunts run the company. When did tech. go super liberal?
+}
+
+P{
+Here is my latest program. Called the B{forker}:
+	Code<<_EOF_
+		int main()
+		{
+			fork();
+			main();
+		}
+	_EOF_
+}
+
+P{
+I declared once I{"porker writes the forker"} which for some mean reason
+was my way to hurt this fatty in B{cpsc} as the I{University of Bobsville}.
+}
+
+P{
+When in fact, I wrote the the run away program while drunk and it never
+worked. Actually I think the code was closer to this:
+
+	Code<<_EOF_
+		int main()
+		{
+			for(;;)
+			{
+				fork();
+				main();
+			}
+		}
+	_EOF_
+}
+
+P{My favorite command it TT{grep} so fuck you!
+}
+
+P{ RandomText{10} }
+P{ RandomText{100} }
+P{ RandomText{200} }
+P{ RandomText{200} }
+P{ RandomText{30} }
+
+include{morestuff.tt}
+
+P{
+There is a concept in I{computer science}. It is B{called}: TT{Fuck    the   police}.
+B{HTML Escape test}: \<B>Fuck Me\</B> SC{&lt;}
+}
+
+P{
+B{Fuck the police. I{I love red blue white}. I think these are like I{crap}: a b c d}.
+}
+
+P{
+TT{RandomText{10}}:: B{I{RandomText{1}}}:: B{RandomText{0}}.
+This is small caps SC{Hello Fuckor You Little Shit. Was it BeInG BeLitTlEd}.
+That was interesting. Veeeery interesting. B{RandomText{10}}. SC{RandomText{5}}
+}
+
+P{
+So here we are:
+	SC{RandomText{5} / B{I{SC{RandomText{5} } } } }! That was basically my
+opinion of the lated contraversy. Well, So long..
+}
+
+P{
+Logo idea: SC{I{TaggedText\{\}}}.
+}
+
+HDBAR{
+	Code<<_EOF_
+            x
+           / \
+         ba   b
+          |   |
+          d   e
+	_EOF_
+}
+
+P{HDBAR{Foobar myself. B{I like raw sewage}. Bye Byte folks.} This is more.}
+
+LINENUMBERS{
+	Code<<_EOF_
+
+
+  My god!
+    What have I done
+     
+      
+       I like pizza!
+    Now.????? }}}}}}
+
+
+	_EOF_
+}
+
+} //{ MySite.body }

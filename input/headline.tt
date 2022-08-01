@@ -1,0 +1,632 @@
+//{
+//
+// How to use this file:
+//
+// include{headline.tt}
+//
+// Head_Line{}
+//
+//}
+
+DEFINE{ @@S_H_SPIRITUAL{
+	ChooseTerm{
+		T{ spiritual }
+		T{ clairvoyant }
+		T{ telepathic }
+		T{ telekinetic }
+	}
+} }
+
+DEFINE{ @@S_H_RELATIVE{
+	ChooseTerm{
+		T{ father }
+		T{ uncle }
+		T{ grandfather }
+		T{ grandmother }
+		T{ son }
+		T{ daughter }
+		T{ mother }
+		T{ aunt }
+		T{ postman }
+		T{ accountant }
+		T{ dog catcher }
+		T{ IRS man }
+		T{ hairdresser }
+		T{ avon lady }
+	}
+} }
+
+DEFINE{ @@S_H_WEAPON{
+	ChooseTerm{
+		T{ meat cleaver }
+		T{ hatchet }
+		T{ machete }
+		T{ phased plasma rifle }
+		T{ chain saw }
+		T{ samurai sword }
+		T{ axe }
+		T{ machine gun }
+		T{ anti-tank weapon }
+	}
+} }
+
+DEFINE{ @@S_H_FRUIT{
+	ChooseTerm{
+		T{ mango }
+		T{ tomato }
+		T{ banana }
+		T{ cherry }
+		T{ apple }
+		T{ plum }
+		T{ pear }
+		T{ orange }
+		T{ tangerine }
+		T{ lemon }
+		T{ lime }
+	}
+} }
+
+DEFINE{ @@S_H_GHOST{
+	ChooseTerm{
+		T{ ghost }
+		T{ evil spirt }
+		T{ poltergist }
+		T{ demon }
+		T{ phantom }
+		T{ bogie man }
+	}
+} }
+
+DEFINE{ @@S_H_RELIGION{
+	ChooseTerm{
+		T{ buddist }
+		T{ methodist }
+		T{ baptist }
+		T{ islamic }
+		T{ moslem }
+		T{ roman catholic }
+		T{ atheist }
+	}
+} }
+
+DEFINE{ @@S_H_UFO{
+	ChooseTerm{
+		T{ UFO }
+		T{ flying saucer }
+		T{ space ship }
+		T{ mother ship }
+		T{ space cruiser }
+		T{ USS enterprise }
+		T{ galactic space cruiser }
+	}
+} }
+
+DEFINE{ @@S_H_PLANET{
+	ChooseTerm{
+		T{ pluto }
+		T{ mars }
+		T{ venus }
+		T{ mercury }
+		T{ neptune }
+		T{ saturn }
+		T{ jupiter }
+		T{ the moon }
+		T{ uranus }
+	}
+} }
+
+DEFINE{ @@S_H_ET{
+	ChooseTerm{
+		T{ extra-terrestrial }
+		T{ E.T. }
+		T{ space alien }
+		T{ being }
+		T{ space being }
+		T{ cyborg }
+		T{ humanoid }
+		T{ alien }
+	}
+} }
+
+DEFINE{ @@S_H_DRUG{
+	ChooseTerm{
+		T{ heroin }
+		T{ lsd }
+		T{ angel dust }
+		T{ coke }
+		T{ cocaine }
+		T{ crack }
+		T{ quaaludes }
+		T{ amphetamines }
+		T{ ectacy }
+		T{ speed }
+		T{ pot }
+		T{ WEED }
+	}
+} }
+
+DEFINE{ @@S_H_MADNESS{
+	ChooseTerm{
+		T{ crazed }
+		T{ drug-crazed }
+		T{ insane }
+		T{ manic depressive }
+		T{ neurotic }
+		T{ psychotic }
+		T{ psychopathic }
+		T{ devoted }
+		T{ religious }
+		T{ fanatical }
+		T{ pathological }
+	}
+} }
+
+DEFINE{ @@S_H_KILLER{
+	ChooseTerm{
+		T{ great white shark }
+		T{ terminator }
+		T{ ewok }
+		T{ wombat }
+		T{ bee }
+		T{ wasp }
+		T{ whale }
+		T{ shark }
+		T{ lion }
+		T{ dolphin }
+		T{ elephant }
+		T{ worm }
+		T{ clam }
+		T{ kitten }
+		T{ lobster }
+		T{ tiger }
+		T{ leopard }
+		T{ panda }
+		T{ crocodile }
+		T{ @@S_H_MADNESS{} @@S_H_FRUIT{} }
+	}
+} }
+
+DEFINE{ @@S_H_MCELEB{
+	ChooseTerm{
+		T{ ronald reagan }
+		T{ frank sinatra }
+		T{ michael jackson }
+		T{ clay aiken }
+		T{ mick jagger }
+		T{ donny osmond }
+		T{ lou albano }
+		T{ sylvester stallone }
+		T{ sean penn }
+		T{ bob dylan }
+		T{ david letterman }
+		T{ johnny carson }
+		T{ muammar quadaffi }
+		T{ moammar khadafy }
+		T{ kenny rogers }
+		T{ burt reynolds }
+		T{ saddam }
+		T{ richard nixon }
+		T{ prince charles }
+		T{ george lucas }
+	}
+} }
+
+DEFINE{ @@S_H_FCELEB{
+	ChooseTerm{
+		T{ princess diana }
+		T{ queen elizabeth }
+		T{ nancy reagan }
+		T{ linda ronstadt }
+		T{ maggie trudeau }
+		T{ liz taylor }
+		T{ tina turner }
+		T{ dolly parton }
+		T{ cher }
+		T{ jane fonda }
+		T{ eva gabor }
+		T{ joan rivers }
+		T{ madonna }
+		T{ cindi lauper }
+	}
+} }
+
+DEFINE{ @@S_H_BABY{
+	ChooseTerm{
+		T{ baby }
+		T{ children }
+		T{ son }
+		T{ daughter }
+	}
+} }
+
+DEFINE{ @@S_H_FDEAD{
+	ChooseTerm{
+		T{ cleopatra }
+		T{ joan of arc }
+		T{ lady godiva }
+		T{ queen victoria }
+		T{ the queen of sheba }
+	}
+} }
+
+DEFINE{ @@S_H_DFCELEB{
+	ChooseTerm{
+		T{ Marilyn Monroe }
+		T{ Janis Joplin }
+		T{ @@S_H_FDEAD{} }
+	}
+} }
+
+DEFINE{ @@S_H_MDEAD{
+	ChooseTerm{
+		T{ Atilla the Hun }
+		T{ King Henry VIII }
+		T{ Abraham Lincoln }
+		T{ George Washington }
+		T{ Moses }
+	}
+} }
+
+DEFINE{ @@S_H_DMCELEB{
+	ChooseTerm{
+		T{ Elvis }
+		T{ Jimi Hendrix }
+		T{ Jim Morrison }
+		T{ John F. Kennedy }
+		T{ Bing Crosby }
+		T{ John Lennon }
+		T{ JFK }
+		T{ Groucho Marx }
+		T{ Harry Chapin }
+		T{ @@S_H_MDEAD{} }
+	}
+} }
+
+DEFINE{ @@S_H_DCELEB{
+	ChooseTerm{
+		T{ @@S_H_DMCELEB{} }
+		T{ @@S_H_DFCELEB{} }
+	}
+} }
+
+DEFINE{ @@S_H_DEAD{
+	ChooseTerm{
+		T{ @@S_H_FDEAD{} }
+		T{ @@S_H_MDEAD{} }
+	}
+} }
+
+DEFINE{ @@S_H_EAT{
+	ChooseTerm{
+		T{ ate }
+		T{ kidnapped }
+		T{ took }
+		T{ kills }
+		T{ devours }
+		T{ maimed }
+		T{ injured }
+		T{ rapes }
+	}
+} }
+
+DEFINE{ @@S_H_SAY{
+	ChooseTerm{
+		T{ say }
+		T{ reveal }
+		T{ claim }
+		T{ insist }
+	}
+} }
+
+DEFINE{ @@S_H_DOCTOR{
+	ChooseTerm{
+		T{ doctor }
+		T{ psychologist }
+		T{ psychiatrist }
+		T{ physician }
+		T{ neurologist }
+		T{ dentist }
+		T{ pediatrician }
+		T{ vetrinarian }
+		T{ optician }
+	}
+} }
+
+DEFINE{ @@S_H_SCIENTIST{
+	ChooseTerm{
+		T{ scientist }
+		T{ @@S_H_DOCTOR{} }
+		T{ chemist }
+		T{ physicist }
+		T{ meta-physicist }
+		T{ engineer }
+		T{ computer scientist }
+		T{ professor }
+		T{ technician }
+		T{ whiz kid }
+		T{ brain boff }
+		T{ ai expert }
+	}
+} }
+
+DEFINE{ @@S_H_NATIONALITY{
+	ChooseTerm{
+		T{ russian }
+		T{ soviet }
+		T{ british }
+		T{ polish }
+		T{ french }
+		T{ belgian }
+		T{ swiss }
+		T{ german }
+		T{ spanish }
+		T{ mexican }
+		T{ ukranian }
+		T{ american }
+		T{ canadian }
+		T{ albanian }
+		T{ australian }
+		T{ chinese }
+		T{ japanese }
+	}
+} }
+
+DEFINE{ @@S_H_DISEASE{
+	ChooseTerm{
+		T{ herpes }
+		T{ AIDS }
+		T{ flu }
+		T{ leprosy }
+		T{ vd }
+		T{ a backache }
+		T{ chicken pox }
+		T{ malaria }
+		T{ laryngitis }
+		T{ a nosebleed }
+		T{ tuberculosis }
+		T{ cancer }
+	}
+} }
+
+DEFINE{ @@S_H_FICTCHAR{
+	ChooseTerm{
+		T{ Santa Claus }
+		T{ Bigfoot }
+		T{ Snow White }
+		T{ God }
+		T{ Bhudda }
+		T{ Mary Poppins }
+		T{ The Loch Ness Monster }
+		T{ Yogi Bear }
+		T{ James Bond }
+		T{ The Wicked Witch of the West }
+		T{ The Wizard of Oz }
+		T{ Captain Kirk }
+		T{ The Tooth Fairy }
+		T{ Kermit the frog }
+		T{ Batman }
+		T{ Superman }
+		T{ Spiderman }
+		T{ The Hulk }
+	}
+} }
+
+DEFINE{ @@S_H_KILL{
+	ChooseTerm{
+		T{ kills }
+		T{ murders }
+		T{ maims }
+		T{ slaughters }
+		T{ mutilates }
+		T{ shoots }
+		T{ mugs }
+	}
+} }
+
+DEFINE{ @@S_H_NUMBER1{
+	ChooseTerm{
+		T{ two }
+		T{ three }
+		T{ four }
+		T{ five }
+		T{ six }
+		T{ seven }
+		T{ eight }
+		T{ nine }
+	}
+} }
+
+DEFINE{ @@S_H_NUMBER2{
+	ChooseTerm{
+		T{ ten }
+		T{ eleven }
+		T{ twelve }
+		T{ thirteen }
+		T{ fourteen }
+		T{ fifteen }
+		T{ sixteen }
+		T{ seventeen }
+		T{ eighteen }
+		T{ nineteen }
+	}
+} }
+
+DEFINE{ @@S_H_NUMBER{
+	ChooseTerm{
+		T{ @@S_H_NUMBER1{} }
+		T{ @@S_H_NUMBER2{} }
+		T{ twenty- @@S_H_NUMBER1{} }
+		T{ thirty- @@S_H_NUMBER1{} }
+		T{ forty- @@S_H_NUMBER1{} }
+		T{ fifty- @@S_H_NUMBER1{} }
+		T{ sixty- @@S_H_NUMBER1{} }
+		T{ seventy- @@S_H_NUMBER1{} }
+		T{ eighty- @@S_H_NUMBER1{} }
+		T{ ninety- @@S_H_NUMBER1{} }
+	}
+} }
+
+DEFINE{ @@S_H_FOOD{
+	ChooseTerm{
+		T{ taco }
+		T{ @@S_H_FRUIT{} }
+		T{ enchilada }
+		T{ burrito }
+		T{ watermelon }
+		T{ triple Ice Cream Cone }
+		T{ tostada }
+	}
+} }
+
+DEFINE{ @@S_H_PERSON{
+	ChooseTerm{
+		T{ @@S_H_KILLER{} }
+		T{ football player }
+		T{ man }
+		T{ woman }
+		T{ tv personality }
+		T{ game show host }
+		T{ politician }
+		T{ @@S_H_SCIENTIST{} }
+		T{ @@S_H_DOCTOR{} }
+		T{ @@S_H_NATIONALITY{} @@S_H_SCIENTIST{} }
+		T{ @@S_H_NATIONALITY{} @@S_H_DOCTOR{} }
+		T{ unemployed @@S_H_SCIENTIST{} }
+		T{ student }
+		T{ air traffic controller }
+		T{ @@S_H_NATIONALITY{} student }
+		T{ @@S_H_ET{} }
+	}
+} }
+
+DEFINE{ @@S_H_AIRCRAFT{
+	ChooseTerm{
+		T{ airplane }
+		T{ helicopter }
+		T{ airship }
+		T{ hot air balloon }
+		T{ hang glider }
+		T{ helium balloon }
+		T{ UFO }
+		T{ jet fighter }
+		T{ stealth bomber }
+		T{ 747 }
+		T{ DC-10 }
+	}
+} }
+
+DEFINE{ @@S_H_CELEB{
+	ChooseTerm{
+		T{ @@S_H_MCELEB{} }
+		T{ @@S_H_FCELEB{} }
+	}
+} }
+
+DEFINE{ @@S_H_PLACE{
+	ChooseTerm{
+		T{ Redwood City }
+		T{ Australia }
+		T{ Nevada }
+		T{ Austin, Texas }
+		T{ Magrathea }
+		T{ Outer Space }
+		T{ Memphis }
+		T{ England }
+		T{ San Francisco }
+		T{ Castro Street }
+		T{ San Jose }
+		T{ L.A. }
+		T{ New York }
+		T{ Orlando, Florida }
+		T{ Missouri }
+		T{ Middle Earth }
+		T{ The Shire }
+		T{ Barsoom }
+		T{ Planet Vulcan }
+		T{ Fremont Airport }
+		T{ Tokyo }
+		T{ Transylvania }
+		T{ Times Square }
+		T{ Wall Street }
+		T{ San Rafael }
+		T{ Israel }
+		T{ Beirut }
+		T{ Mordor }
+		T{ BBC television center }
+		T{ Dr. Who's Tardis }
+		T{ Stalingrad }
+		T{ Moscow }
+		T{ Amsterdam }
+		T{ Manchester }
+		T{ Edinburgh }
+		T{ Red Square }
+		T{ Kremlin }
+		T{ Mimico }
+		T{ Hollywood }
+		T{ Daytona Beach }
+		T{ Salt Lake City }
+		T{ Mississauga }
+		T{ Majorca }
+		T{ Bangkok }
+		T{ Monte Carlo }
+		T{ Lisbon }
+		T{ Barrie }
+		T{ Nirvana }
+	}
+} }
+
+DEFINE{ Bib{
+	@@S_H_PLACE{}
+} }
+
+DEFINE{ Head_Line{
+	ChooseTerm{
+		T{ killer @@S_H_KILLER{} from @@S_H_PLANET{} @@S_H_EAT{} my @@S_H_BABY{} }
+		T{ @@S_H_CELEB{} is really @@S_H_ET{} from @@S_H_PLANET{} (according to @@S_H_CELEB{}) }
+		T{ @@S_H_CELEB{} is really @@S_H_ET{} from @@S_H_PLANET{} }
+		T{ @@S_H_MCELEB{} and @@S_H_FCELEB{} secretly married in @@S_H_PLACE{} }
+		T{ eating @@S_H_FRUIT{} can give you @@S_H_DISEASE{} (according to @@S_H_NATIONALITY{} @@S_H_DOCTOR{}) }
+		T{ @@S_H_ET{} from @@S_H_PLANET{} gave @@S_H_CELEB{} @@S_H_DISEASE{} }
+		T{ @@S_H_FICTCHAR{} is for real. @@S_H_NATIONALITY{} @@S_H_SCIENTIST{} has undeniable proof }
+		T{ @@S_H_MCELEB{} is really @@S_H_CELEB{}'s father }
+		T{ @@S_H_FCELEB{} is really @@S_H_CELEB{}'s mother }
+		T{ @@S_H_NATIONALITY{} @@S_H_SCIENTIST{} discover lost city of @@S_H_PLACE{} }
+		T{ @@S_H_CELEB{} @@S_H_KILL{} @@S_H_NUMBER{} @@S_H_PERSON{} in drunken rampage }
+		T{ @@S_H_PERSON{}, stoned on @@S_H_DRUG{}, @@S_H_KILL{} @@S_H_NUMBER{} @@S_H_PERSON{} }
+		T{ @@S_H_CELEB{} falls @@S_H_NUMBER{} thousand feet out of @@S_H_AIRCRAFT{} ... and survives }
+		T{ @@S_H_ET{} from @@S_H_PLANET{} landed in my garden and @@S_H_EAT{} @@S_H_NUMBER{} @@S_H_FRUIT{} }
+		T{ @@S_H_FCELEB{} gives birth to @@S_H_NUMBER{} @@S_H_BABY{} }
+		T{ @@S_H_RELIGION{} monks report @@S_H_UFO{} sighting in @@S_H_PLACE{} (they came from @@S_H_PLANET{}!) }
+		T{ real life ghost busters exorcise @@S_H_GHOST{} from @@S_H_CELEB{}'s home in @@S_H_PLACE{} }
+		T{ @@S_H_BABY{} @@S_H_KILL{} by pet @@S_H_KILLER{} }
+		T{ i chopped my @@S_H_RELATIVE{} to death with @@S_H_WEAPON{} }
+		T{ @@S_H_PERSON{} goes berserk and @@S_H_KILL{} @@S_H_NUMBER{} @@S_H_PERSON{} with @@S_H_WEAPON{} }
+		T{ @@S_H_FCELEB{} had night of terror with @@S_H_MCELEB{}. (he threatened her with @@S_H_WEAPON{}) }
+		T{ @@S_H_MCELEB{} had night of terror with @@S_H_FCELEB{}. (she threatened me with @@S_H_WEAPON{}) }
+		T{ @@S_H_FRUIT{} has @@S_H_SPIRITUAL{} powers (according to @@S_H_NATIONALITY{} @@S_H_SCIENTIST{}) }
+		T{ @@S_H_PERSON{} saw face of @@S_H_FICTCHAR{} in @@S_H_FOOD{} }
+		T{ elvis died from eating @@S_H_FRUIT{} }
+		T{ @@S_H_NATIONALITY{} @@S_H_SCIENTIST{} produced a @@S_H_SPIRITUAL{} @@S_H_KILLER{} girl }
+		T{ @@S_H_PERSON{} @@S_H_KILL{} @@S_H_NUMBER{} @@S_H_PERSON{}s with @@S_H_WEAPON{} and is acquitted by jury }
+		T{ @@S_H_PERSON{} was struck by lightning @@S_H_NUMBER{} times }
+		T{ jury acquits notorious @@S_H_WEAPON{} murderer from @@S_H_PLACE{} }
+		T{ @@S_H_MCELEB{} and @@S_H_FCELEB{} were seen together in @@S_H_PLACE{} }
+		T{ @@S_H_NATIONALITY{} @@S_H_SCIENTIST{} planted mind control device in my head }
+		T{ @@S_H_NATIONALITY{} @@S_H_SCIENTIST{} found new evidence that @@S_H_FICTCHAR{} exist }
+		T{ @@S_H_CELEB{} was seen travelling to @@S_H_PLACE{} in a stolen @@S_H_AIRCRAFT{} }
+		T{ @@S_H_FICTCHAR{} @@S_H_EAT{} my @@S_H_BABY{} }
+		T{ @@S_H_MCELEB{} is the father of my @@S_H_BABY{} }
+		T{ @@S_H_FCELEB{} is the mother of my @@S_H_BABY{} }
+		T{ @@S_H_FCELEB{} filed paternity suit against @@S_H_FCELEB{} (claiming sex change) }
+		T{ i am the reincarnation of @@S_H_FDEAD{} }
+		T{ i am the reincarnation of @@S_H_MDEAD{} }
+		T{ @@S_H_SCIENTIST{} discovered @@S_H_FCELEB{} was married to @@S_H_MDEAD{} in previous life }
+		T{ i spoke to @@S_H_DCELEB{} through @@S_H_FRUIT{} }
+		T{ i saw @@S_H_DCELEB{} alive and well in @@S_H_PLACE{} }
+		T{ @@S_H_NATIONALITY{} @@S_H_SCIENTIST{} resurrected @@S_H_DCELEB{} }
+		T{ in @@S_H_MADNESS{} rage, @@S_H_PERSON{} @@S_H_KILL{} @@S_H_NUMBER{}, self }
+		T{ @@S_H_CELEB{} is addicted to @@S_H_DRUG{} }
+	}
+} }
+
+

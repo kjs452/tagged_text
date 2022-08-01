@@ -1,0 +1,44 @@
+include{common.tt}
+
+MySite.top_url{404}
+MySite.window_title{404 Error no such page}
+
+MySite.side{
+	Heading{
+		Categories
+		Link{Rambles and rants			URL{index.html}}
+		Link{Music, Movies				URL{index.html}}
+		Link{Web Designing				URL{index.html}}
+		Link{Wordpress Themes			URL{index.html}}
+		Link{Free Icons 12-04-6666		URL{index.html}}
+	}
+
+	Heading{
+		Pages and I{more}
+		Link{Rambles and rants			URL{index.html}}
+		Link{Music, Movies				URL{index.html}}
+		Link{Web Designing				URL{index.html}}
+		Link{Wordpress Themes			URL{index.html}}
+		Link{Free						URL{index.html}}
+	}
+
+	Heading{
+		SC{Latest Posts}
+		Link{Rambles and rants			URL{index.html}}
+		Link{Music, Songs				URL{index.html}}
+		Link{Indie Films				URL{index.html}}
+		Link{Wordpress Themes			URL{index.html}}
+		Link{Free						URL{index.html}}
+	}
+}
+
+MySite.body{
+REF{top}
+Title{404 ERROR}
+P{ RandomText{200} }
+
+P{ RandomText{200} }
+
+P{ RandomText{200} }
+
+} //{ MySite.body }

@@ -1,0 +1,104 @@
+
+//{ ====================================================================== }
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-12-4}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-12-3}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-11-13}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-11-10}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-11-1}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-10-30}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-10-29}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-10-28}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-10-20}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-10-12}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-9-24}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-9-20}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-9-15}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-9-12}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-9-4}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-8-14}
+P{ RandomText{100} }
+}
+
+Blog{
+Title{ RandomText{8} }
+Date{2015-8-2}
+P{ RandomText{100} }
+}

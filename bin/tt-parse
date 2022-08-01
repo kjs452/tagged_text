@@ -1,0 +1,59 @@
+#!/usr/bin/python
+#
+# Parse a Tagged{Text} file.
+#
+#
+import taggedtext
+import os
+import sys
+
+######################################################################
+#
+# Usage
+#
+def Usage(msg):
+	sys.stderr.write("""\
+Usage: tt-parse [filename]
+
+Reads 'filename' assumed to be a Tagged{Text} formatted
+file. If 'filename' is omitted then reads from stdin.
+
+Writes a Tagged Text JSON Tree to stdout.
+
+%s
+
+""" % (msg) )
+
+	exit(1)
+
+######################################################################
+#
+# main
+#
+def main():
+	if len(sys.argv) == 1:
+		filename = "stdin"
+		f = sys.stdin
+	elif len(sys.argv) > 2:
+		Usage("too many arguments given")
+	else:
+		filename = sys.argv[1]
+		try:
+			f = open(filename, 'r')
+		except IOError as e:
+			Usage("%s: %s errno=%d" % (filename, e.strerror, e.errno))
+		except Exception as e:
+			Usage("%s: unable to open: %s" % (filename, e))
+
+	node = taggedtext.parse(f, filename)
+
+	f.close()
+
+	error_count = node.report_errors(sys.stderr)
+	if error_count > 0:
+		exit(1)
+
+	node.write_tree(sys.stdout)
+	exit(0)
+
+main()

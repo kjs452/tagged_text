@@ -1,0 +1,61 @@
+#!/usr/bin/python
+#
+# write tagged{text} JSON tree back to tagged{text}
+#
+import taggedtext
+import os
+import sys
+
+######################################################################
+#
+# Usage
+#
+def Usage(msg):
+	sys.stderr.write("""\
+Usage: tt-print [filename]
+
+Reads 'filename' assumed to be a Tagged Text JSON Tree
+formatted file. If 'filename' is omitted then reads from stdin.
+
+Writes a psuedo Tagged{Text} document to stdout.
+
+Psuedo because:
+	* Translated nodes are written as they are intended
+	* Error nodes are written out as plain text
+
+Because TRANSLATED and ERROR nodes cannot be represented in Tagged{Text}
+these nodes are written in their plain text form.
+
+This utility is intended more for debugging than anything else.
+
+%s
+
+""" % (msg) )
+
+	exit(1)
+
+def main():
+	if len(sys.argv) == 1:
+		f = sys.stdin
+	elif len(sys.argv) > 2:
+		Usage("too many arguments given")
+	else:
+		filename = sys.argv[1]
+		try:
+			f = open(filename, 'r')
+		except IOError as e:
+			Usage("%s: %s errno=%d" % (filename, e.strerror, e.errno))
+		except Exception as e:
+			Usage("%s: unable to open: %s" % (filename, e))
+
+	try:
+		node = taggedtext.read_tree(f)
+	except Exception as e:
+		Usage("Failed to read tree: %s" % (e))
+
+	f.close()
+
+	node.write(sys.stdout)
+	exit(0)
+
+main()

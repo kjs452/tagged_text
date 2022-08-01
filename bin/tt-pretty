@@ -1,0 +1,53 @@
+#!/usr/bin/python
+#
+# pretty print
+#
+import taggedtext
+import os
+import sys
+
+######################################################################
+#
+# Usage
+#
+def Usage(msg):
+	sys.stderr.write("""\
+Usage: tt-pretty [filename]
+
+Reads 'filename' assumed to be a Tagged Text JSON Tree
+formatted file. If 'filename' is omitted then reads from stdin.
+
+Writes a pretty Tagged Text JSON Tree to stdout.
+
+%s
+
+""" % (msg) )
+
+	exit(1)
+
+def main():
+	if len(sys.argv) == 1:
+		f = sys.stdin
+	elif len(sys.argv) > 2:
+		Usage("too many arguments given")
+	else:
+		filename = sys.argv[1]
+		try:
+			f = open(filename, 'r')
+		except IOError as e:
+			Usage("%s: %s errno=%d" % (filename, e.strerror, e.errno))
+		except Exception as e:
+			Usage("%s: unable to open: %s" % (filename, e))
+
+	try:
+		node = taggedtext.read_tree(f)
+	except Exception as e:
+		Usage("Failed to read tree: %s" % (e))
+
+	f.close()
+
+	node.write_tree_pretty("    ", sys.stdout)
+
+	exit(0)
+
+main()

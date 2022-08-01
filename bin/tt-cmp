@@ -1,0 +1,75 @@
+#!/usr/bin/python
+#
+# Compare two tagged text files for logical equality
+#
+#
+import taggedtext
+import os
+import sys
+
+######################################################################
+#
+# Usage
+#
+def Usage(msg):
+	sys.stderr.write("""\
+Usage: tt-cmp filename1 filename2
+
+Reads 'filename1' and 'filename2' assumed to be a Tagged{Text} formatted
+files.
+
+Outputs if these two files are the same Tagged{Text} document, logically
+which excludes line numbers, etc...
+
+%s
+
+""" % (msg) )
+
+	exit(1)
+
+def Open(filename):
+	try:
+		f = open(filename, 'r')
+	except IOError as e:
+		Usage("%s: %s errno=%d" % (filename, e.strerror, e.errno))
+	except Exception as e:
+		Usage("%s: unable to open: %s" % (filename, e))
+
+	return f
+
+######################################################################
+#
+# main
+#
+def main():
+	if len(sys.argv) < 3:
+		Usage("too few arguments given")
+	elif len(sys.argv) > 3:
+		Usage("too many arguments given")
+	else:
+		f1 = Open(sys.argv[1])
+		f2 = Open(sys.argv[2])
+
+	node1 = taggedtext.parse(f1, sys.argv[1])
+
+	error_count = node1.report_errors(sys.stderr)
+	if error_count > 0:
+		exit(1)
+
+	node2 = taggedtext.parse(f2, sys.argv[2])
+
+	error_count = node2.report_errors(sys.stderr)
+	if error_count > 0:
+		exit(1)
+
+	f1.close()
+	f2.close()
+
+	if node1.logically_equal(node2):
+		sys.stdout.write("Equal\n")
+		exit(0)
+	else:
+		sys.stdout.write("Not Equal\n")
+		exit(1)
+
+main()

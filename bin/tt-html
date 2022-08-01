@@ -1,0 +1,83 @@
+#!/usr/bin/python
+#
+# Spits out a basic HTML document from a tagged text document.
+# Uses tt_html filters
+#
+# This was the initial script i used to
+# spit out some HTML from tagged text.
+# Can still be used, but it not used anymore.
+#
+#
+import os
+import sys
+import taggedtext
+import tt_html
+
+# <!doctype html>
+# <html lang=en>
+# <head>
+# <meta charset=utf-8>
+# <title>blah</title>
+# </head>
+# <body>
+# <p>I'm the content</p>
+# </body>
+# </html>
+
+HTML_DOC_BEGIN="""\
+<!doctype html>
+<html lang=en>
+<head>
+<meta charset=utf-8>
+"""
+
+HTML_TITLE_BEGIN="""\
+<title>
+"""
+
+HTML_TITLE_END="""\
+</title>
+</head>
+<body>
+"""
+
+HTML_DOC_END="""\
+</body>
+</html>
+"""
+
+######################################################################
+######################################################################
+######################################################################
+######################################################################
+
+######################################################################
+#
+# main
+#
+def main():
+	root = taggedtext.read_tree(sys.stdin)
+
+	root.add_log("tt-html")
+
+	n = taggedtext.make_translated_node(root.filename(), -1, -1, HTML_DOC_BEGIN, HTML_DOC_END)
+	root.push_children(n)
+
+	tit = taggedtext.make_translated_node(root.filename(), -1, -1, HTML_TITLE_BEGIN, HTML_TITLE_END)
+	tn = taggedtext.make_tag_node(root.filename(), -1, -1, "<HTML_TITLE>")
+	tit.add_child_front(tn)
+
+	n.add_child_front(tit)
+
+	tt_html.run(root)
+
+	error_count = root.report_errors(sys.stderr)
+	if error_count > 0:
+		exit(1)
+
+#	root.write_tree(sys.stdout);
+	root.write_translated(sys.stdout);
+
+	exit(0)
+
+main()
