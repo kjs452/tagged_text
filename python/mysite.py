@@ -268,14 +268,14 @@ def process_side_tag(root):
 				return
 			result.append(v)
 		else:
-			sys.stderr.write("%s unexpected child node in SIDE.side{}. Expecting Heading{} tags only.\n"
+			sys.stderr.write("%s unexpected child node in MySite.side{}. Expecting Heading{} tags only.\n"
 								% (child.location_string()) )
 			return None
 
 	return result
 
 ######################################################################
-# Process all SIDE. tags.
+# Process all MySite. tags.
 # Look at the top level of root
 # for all MySite.xxxxx tags
 #
