@@ -66,9 +66,8 @@ SubSubSection{Subsection: RandomWords{1}}
 include{morestuff.tt}
 
 P{
-No indeed. I must B{CONTINUE} this fucking farce!!! I{Apple Inc.} is one
-of the most fucking corrupt shit companies in the world. So is I{B{Facebook Inc, LLP.}}
-because liberal cunts run the company. When did tech. go super liberal?
+No indeed. I must B{CONTINUE} this farce!!! I{Apple Inc.} is one
+of the most amazing companies in the world. So is I{B{Facebook Inc, LLP.}}
 }
 
 P{
@@ -103,7 +102,7 @@ worked. Actually I think the code was closer to this:
 	_EOF_
 }
 
-P{My favorite command it TT{grep} so fuck you!
+P{My favorite command it TT{grep} so bite me!
 }
 
 P{ RandomText{10} }
@@ -115,17 +114,17 @@ P{ RandomText{30} }
 include{morestuff.tt}
 
 P{
-There is a concept in I{computer science}. It is B{called}: TT{Fuck    the   police}.
-B{HTML Escape test}: \<B>Fuck Me\</B> SC{&lt;}
+There is a concept in I{computer science}. It is B{called}: TT{hello police}.
+B{HTML Escape test}: \<B>Test Me\</B> SC{&lt;}
 }
 
 P{
-B{Fuck the police. I{I love red blue white}. I think these are like I{crap}: a b c d}.
+B{hello police. I{I love red blue white}. I think these are like I{crap}: a b c d}.
 }
 
 P{
 TT{RandomText{10}}:: B{I{RandomText{1}}}:: B{RandomText{0}}.
-This is small caps SC{Hello Fuckor You Little Shit. Was it BeInG BeLitTlEd}.
+This is small caps SC{Hello Yuckor You Little Crap. Was it BeInG BeLitTlEd}.
 That was interesting. Veeeery interesting. B{RandomText{10}}. SC{RandomText{5}}
 }
 
@@ -149,7 +148,7 @@ HDBAR{
 	_EOF_
 }
 
-P{HDBAR{Foobar myself. B{I like raw sewage}. Bye Byte folks.} This is more.}
+P{HDBAR{Foobar myself. B{I love raw sewage}. Bye Byte folks.} This is more.}
 
 LINENUMBERS{
 	Code<<_EOF_

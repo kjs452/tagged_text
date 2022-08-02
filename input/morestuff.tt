@@ -1,5 +1,5 @@
 P{
-This is B{MORE SHIT}. Deal with it.
+This is B{MORE Stuff}. Deal with it.
 //{ include{hello.tt} }
 }
 //{ include{byte.tt} }
