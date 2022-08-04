@@ -4,9 +4,11 @@
 #
 # Run this script from 'bin'.
 #
-# (we chgange directory to input because 'render' and 'blog_maker' look in "." for includes)
-#
 
+# to access python library code
+export PYTHONPATH=${PYTHONPATH}:../python
+
+# change directory to input because 'render' and 'blog_maker' look in "." for includes
 cd ../input
 
 ../bin/render mysite.tmpl ../output *.tt

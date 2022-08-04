@@ -1,11 +1,16 @@
 include{common.tt}
 
-EtcUtmp.top_url{hacks}
-EtcUtmp.window_title{Tagged Text Raw Source}
+MySite.top_url{projects}
+MySite.window_title{Tagged Text Raw Source}
 
-include{taggedtext_common.tt}
+MySite.side{
+	Heading{
+		Links
+		Link{Tagged Text URL{taggedtext.html}}
+	}
+}
 
-EtcUtmp.body{
+MySite.body{
 
 Title{Tagged Text Raw Source}
 P{ By: AuthorName{} }
@@ -31,16 +36,18 @@ Section{ common.tt }
 P{ Here is B{TT{common.tt}}, one of the files included by the previous file: }
 BlockQuote{ HEREDOC{ Code{common.tt} } }
 
-Section{ taggedtext_common.tt }
-P{ Here is B{TT{taggedtext_common.tt}}, another include file: }
-BlockQuote{ HEREDOC{ Code{taggedtext_common.tt} } }
-
 Section{ taggedtext_source.tt }
 
 P{
-And now... to totally fuck with your mind, here is I{this} file: B{TT{taggedtext_source.tt}}:
+And now... to totally mess with your mind, here is I{this} file: B{TT{taggedtext_source.tt}}:
 }
+
+This is the Tagged{Text} commands needed to include a file:
+
+Code<<_EOF_
+BlockQuote{ HEREDOC{ Code{taggedtext_source.tt} } }
+_EOF_
 
 BlockQuote{ HEREDOC{ Code{taggedtext_source.tt} } }
 
-} //{ EtcUtmp.body }
+} //{ MySite.body }

@@ -1,11 +1,16 @@
 include{common.tt}
 
-EtcUtmp.top_url{hacks}
-EtcUtmp.window_title{Tagged Text}
+MySite.top_url{projects}
+MySite.window_title{Tagged Text}
 
-include{taggedtext_common.tt}
+MySite.side{
+	Heading{
+		Links
+		Link{Projects URL{projects.html}}
+	}
+}
 
-EtcUtmp.body{
+MySite.body{
 
 Title{TaggedText{}}
 P{ By: AuthorName{} }
@@ -992,4 +997,4 @@ P{
 So now the handy tag TT{Bob\{\}} spits out a Here Document into my code.
 }
 
-} //{ EtcUtmp.body }
+} //{ MySite.body }

@@ -5,11 +5,12 @@
 //
 //}
 
-DEFINE{ AuthorName{Kenny Stauffer} }
-DEFINE{ AuthorEmail{EMAIL@SITE.com} }
-DEFINE{ BirthYear{1975} }
+DEFINE{ AuthorName{Kenneth Stauffer} }
+DEFINE{ AuthorEmail{NONAME@MYSITE.com} }
+DEFINE{ BirthYear{1968} }
 
-MySite.name{ AuthorName{} }			//{ my super secret alias }
+MySite.name{ AuthorName{} }
+MySite.logo{ Ken Stauffer }
 MySite.email{ AuthorEmail{} }			//{ my email }
 MySite.year{2016 - 2022}				//{ my copyright year thing }
 MySite.lastmodified{ NowDT{} }			//{ gets set to the current date/time whenever static site built }

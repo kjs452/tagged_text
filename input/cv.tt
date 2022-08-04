@@ -5,44 +5,13 @@ MySite.top_url{cv}
 MySite.window_title{ AuthorName{}'s Curriculum Vitae}
 
 MySite.side{
-	Heading{
-		Categories
-		Link{Rambles and rants			URL{index.html}}
-		Link{Music, Movies				URL{index.html}}
-		Link{Web Designing				URL{index.html}}
-		Link{Wordpress Themes			URL{index.html}}
-		Link{Free Icons 12-04-6666		URL{index.html}}
-	}
-
-	Heading{
-		Pages and I{more}
-		Link{Rambles and rants			URL{index.html}}
-		Link{Music, Movies				URL{index.html}}
-		Link{Web Designing				URL{index.html}}
-		Link{Wordpress Themes			URL{index.html}}
-		Link{Free						URL{index.html}}
-	}
-
-	Heading{
-		SC{Latest Posts}
-		Link{Rambles and rants			URL{index.html}}
-		Link{Music, Songs				URL{index.html}}
-		Link{Indie Films				URL{index.html}}
-		Link{Wordpress Themes			URL{index.html}}
-		Link{Free						URL{index.html}}
-	}
 }
 
 MySite.body{
 REF{top}
-Title{cv}
-TitleBox{ RandomText{5} }
+
 P{
-This is my CV. The CV for Mr. Bob James Smith Jr. 2nd, BSC. Licensed Drone Pilot.
+See my LINK{LinkedIn URL{https://www.linkedin.com/in/kenneth-stauffer-897a755} } page for my resume.
 }
-
-P{ RandomText{200} }
-
-P{ Head_Line{} }
 
 } //{ MySite.body }
