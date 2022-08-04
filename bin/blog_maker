@@ -539,6 +539,7 @@ def make_template_parameters(num_pages, curr_page, blog_entries, blog_counts, co
 
 	tp['email'] = x['email']
 	tp['name'] = x['name']
+	tp['logo'] = x['logo']
 	tp['year'] = x['year']
 	tp['lastmodified'] = x['lastmodified']
 	tp['top'] = x['top']
