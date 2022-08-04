@@ -19,3 +19,16 @@ of me. I am now sporting a beard. I do PDP-11 repairs now.
 IMGC{photos/kjs22a.jpg}
 
 }
+
+
+
+Blog{
+Title{Palindrome}
+Date{12/2/2021}
+P{
+Today's date is a palindrome. In both US and European style dates. B{12/02/2021} and B{2021/12/02}.
+}
+
+IMGC{photos/kjsstie2.jpg}
+
+}
