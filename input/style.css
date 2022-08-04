@@ -175,7 +175,7 @@ a:hover {
 }
 
 #header2 .logo {
-/*	background-image: url(images/logo.png); */
+	background-image: url(images/logo.png);
 	float: left;
 	height: 20px;
 	width: 400px;
