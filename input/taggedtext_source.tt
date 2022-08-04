@@ -1,0 +1,46 @@
+include{common.tt}
+
+EtcUtmp.top_url{hacks}
+EtcUtmp.window_title{Tagged Text Raw Source}
+
+include{taggedtext_common.tt}
+
+EtcUtmp.body{
+
+Title{Tagged Text Raw Source}
+P{ By: AuthorName{} }
+P{ TT{AuthorEmail{}} }
+P{ B{GitDate{}} }
+
+P{
+This page shows the raw TaggedText{} source code for some files used to
+build this website.
+}
+
+TableOfContents{}
+
+Section{ taggedtext.tt }
+P{
+This is the actual Tagged{Text} document that was used to
+generate: LINK{ URL{taggedtext.html} }.
+}
+
+BlockQuote{ HEREDOC{ Code{taggedtext.tt} } }
+
+Section{ common.tt }
+P{ Here is B{TT{common.tt}}, one of the files included by the previous file: }
+BlockQuote{ HEREDOC{ Code{common.tt} } }
+
+Section{ taggedtext_common.tt }
+P{ Here is B{TT{taggedtext_common.tt}}, another include file: }
+BlockQuote{ HEREDOC{ Code{taggedtext_common.tt} } }
+
+Section{ taggedtext_source.tt }
+
+P{
+And now... to totally fuck with your mind, here is I{this} file: B{TT{taggedtext_source.tt}}:
+}
+
+BlockQuote{ HEREDOC{ Code{taggedtext_source.tt} } }
+
+} //{ EtcUtmp.body }
