@@ -525,9 +525,9 @@ def make_template_parameters(num_pages, curr_page, blog_entries, blog_counts, co
 	#
 	if curr_page != num_pages:
 		d = blog_entries[0]['date']
-		tp['window_title'] = "MySite's Blog - " + MONTH_NAME[d[1]-1] + " " + str(d[0])
+		tp['window_title'] = MONTH_NAME[d[1]-1] + " " + str(d[0])
 	else:
-		tp['window_title'] = "MySite's Blog"
+		tp['window_title'] = ""
 
 	######################################################################
 	#
