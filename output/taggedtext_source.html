@@ -1,0 +1,1206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Tagged  Text  Raw  Source</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="Header">
+  <ul id="navigation">
+    
+		
+            <li><a href="index.html">home</a></li>
+		
+    
+		
+            <li><a href="cv.html">cv</a></li>
+		
+    
+		
+            <li class="active" ><a href="projects.html">projects</a></li>
+		
+    
+		
+            <li><a href="blog.html">blog</a></li>
+		
+    
+  </ul>
+</div>
+
+<div id="header2">
+ <div class="logo"><b>Ken  Stauffer</b></div>
+  <div class="banner"><b><pre> </pre></b></div>
+</div>
+
+<div id="Content">
+<A NAME="TOC1"></A><center><h1> Tagged  Text  Raw  Source</h1></center><p>
+ By: Kenneth  Stauffer
+</p>
+<p>
+<tt> NONAME@MYSITE.com</tt>
+</p>
+<p>
+<b>August  4th,  2022</b>
+</p>
+<p>
+ This  page  shows  the  raw <tt><b>Tagged{</b>Text<b>}</b></tt> source  code  for  some  files  used  to  build  this  website.
+</p>
+
+<p>
+<ul>
+
+<li><A HREF="#TOC1"> Tagged  Text  Raw  Source</A></li>
+
+<p>
+<ul>
+
+<li><A HREF="#TOC2"> taggedtext.tt</A></li>
+
+<li><A HREF="#TOC3"> common.tt</A></li>
+
+<li><A HREF="#TOC4"> taggedtext_source.tt</A></li>
+
+</ul>
+</p>
+
+</ul>
+</p>
+<A NAME="TOC2"></A><h1> taggedtext.tt</h1><p>
+ This  is  the  actual <tt><b>Tagged{</b>Text<b>}</b></tt> document  that  was  used  to  generate: <A HREF="taggedtext.html">taggedtext.html</A>.
+</p>
+<blockquote>
+<pre>
+include{common.tt}
+
+MySite.top_url{projects}
+MySite.window_title{Tagged Text}
+
+MySite.side{
+	Heading{
+		Links
+		Link{Projects URL{projects.html}}
+	}
+}
+
+MySite.body{
+
+Title{TaggedText{}}
+P{ By: AuthorName{} }
+P{ TT{AuthorEmail{}} }
+P{ B{GitDate{}} }
+
+TableOfContents{}
+
+Section{Introduction}
+P{
+In the following pages I intend to describe my invention I named Tagged{Text}.
+This is a very simple file format for organizing text documents.
+}
+
+P{ B{NOTE:} This website was constructed using Tagged{Text}. To the see the source
+file used to generate this page, click LINK{here URL{taggedtext_source.html}}. }
+
+//{ Hello!!!! This is a comment.
+//   I
+//     Love
+//        You
+//}
+
+Section{Example}
+P{
+The following is a snippet of text which would qualify as a Tagged{text} document:
+}
+
+BlockQuote{
+Code&lt;&lt;_EOFX_
+	P{
+	This is a I{simple} example of B{Tagged{Text}}. Here is a program:
+
+	  Code&lt;&lt;_EOF_
+	  main()
+	  {
+		  printf("Hello, World!\n");
+	  }
+	  _EOF_
+
+	}
+
+	P{Click LINK{here URL{http://wwww.url.com?abc90} to visit site.}
+	P{Escape chars: '\{' and '\}' and '\\'}
+_EOFX_
+}
+
+P{
+This example demonstrates every feature of Tagged{Text}.
+A Tagged{Text} document is broken down into the following constructs:
+}
+
+BulletList{
+	Item{ LH{Tags:}
+		These are introduced via the use of curly braces, preceeded by a I{tag name}.
+	}
+
+	Item{ LH{Heredocs:}
+		There is one Heredoc in this example, with its own tag name TT{Code}. Heredocs
+		allow blocks of text to be introduced which will not be interpreted.
+	}
+
+	Item{ LH{Words:}
+		Words are any whitespace seperated text that is not a B{Tag} or a B{Heredoc}.
+	}
+
+	Item{ LH{Escape Character:}
+		The escape character is the backslash B{TT{\\}}. It may only preceed the characters B{TT{\{}}, B{TT{\}}},
+		B{TT{\&lt;}} and B{TT{\\}}.
+	}
+
+	Item{ LH{White-space:}
+		White-space is used to delimit I{words} and the beginning of I{tags} and I{heredocs}. Whitespace conists
+		of space, tab and newline characters. Except for delimiting constructs whitespace is stripped
+		from the Tagged{Text} tree. Only in I{heredocs} is whitespace preserved.
+	}
+}
+
+P{
+Tagged{Text} is a file format for tagging and organizing text with tags. These tags can be whatever the author
+wishes them to be. For example the TT{I\{ I{...} \}} tag used in the example above could mean "italics".
+}
+
+IMGC{images/tt_tree10.png}
+
+P{
+This diagram shows a tree representing the example document. Tagged{Text} documents are always given a TT{root}
+node. Each node can have zero or more children. Well, B{word} nodes and B{heredoc} nodes don't have children --these are
+considered leaf nodes. The order of the children is the order in which they appear in the file. I{Tags} introduce new
+nodes which can have children. I{Words} and I{Heredocs} do not have children.
+}
+
+P{
+A heredoc ( TT{Code} in this example) consists of the entire block of text that was given. The programming
+API should make this text available as a list of text lines. Common whitespace (spaces and tabs) are removed
+from the I{heredoc}. Trailing whitespace is also trimmed. This allows heredocs to be indented in you document for
+ease of reading. A B{heredoc} uses a delimiter which is _EOF_ in this example. Any text can be used, which
+will not be part of the text you want to include in the heredoc. All lines of text between TT{Code\&lt;\&lt;_EOF_}
+and TT{_EOF_} will be part of the B{heredoc}.
+}
+
+Section{Why use Tagged{Text}?}
+P{
+I invented Tagged{Text} so that I could markup my website with tags of my own choosing, and then
+craft python scripts which would translate this markup into my static website. I wanted a format
+which was easy to use and remember, and did not enforce any rules and define any meaning to
+markup tags I would invent.
+}
+
+P{
+I looked a TT{YAML}, TT{Markdown}, TT{asciidoc}, TT{html}, TT{xml}, TT{yodl}, TT{s-expressions}
+and many other solutions. They all suffered from several problems:
+}
+
+NumberedList{
+	Item{
+		LH{Funky complicated syntax}
+	}
+
+	Item{
+		LH{Predefined structural elements}
+	}
+
+	Item{
+		LH{Forced to use software which I have no control over}
+	}
+
+}
+
+P{
+I always like the syntax of TeX and LaTeX from my college days. So I designed Tagged{Text} to have a
+syntax that reminds me of TeX. Tagged{Text} in my opinion is the simplest file format one can have
+to structure a text document and not be over burdnoned with gross syntactic elements. B{XML} would have
+been a good choice, except the angled bracket tax one must pay to use it. Plus all the gross boiler plate
+pre-amble stuff which is incomprehensible to me.
+}
+
+P{
+The real power of Tagged{Text} is having programs that can process it. Tree's are very easy structures
+for computer programs to handle. The recursive solutions that emerge are very clean and simple to reason
+about.
+}
+
+Section{White-space}
+P{
+One of the bolder decisions I made was to totally strip white-space from the document. White-space was
+only used to break the document into words, tags, etc.... As a long time compiler writer, I appreciated
+the cleansing effect that ignoring white space can have for a parser. The same goes with Tagged{Text}. I
+thought it would cause lots of problems, but it turns out it is a very clean way to process a document.
+}
+
+P{
+Removing white-space is good, therefore. And I just wanted to I{emphasize} this fact with its own section!
+}
+
+Section{The Problem With Markdown Languages}
+P{
+In this section I propose a better solution to the problem of
+turning text documents into something that looks good in various
+formats.
+}
+
+P{
+Markdown/Markup language let you type text in an editor and get a decent
+looking document when published on the web or a pdf document.
+}
+
+P{
+Markup or Markdown or whatever you want to call them are
+all around.
+}
+
+BulletList{
+Item{Markdown}
+Item{Git Flavored Markdown}
+Item{Asciidoc}
+Item{Creole}
+}
+
+P{
+See more at: LINK{URL{https://en.wikipedia.org/wiki/List_of_lightweight_markup_languages}}.
+}
+
+P{
+The problem with each and every one of them is they enforce
+the concepts on your text. They control how you must craft your
+text document. Further these rules control how the fucking thing will
+appear when converted to HTML.
+}
+
+P{
+What is wrong with these systems is you must learn their markup
+syntax. You must hunt through the possibilities to hope to get
+a document you are happy with. You are also limited to whatever
+they decided to offer.
+}
+
+P{
+I propose a new thing. It is not markup or markdown or whatever
+you want to call it. This new thing, I call Tagged{Text}.
+You write text as normal, but you follow a simple rule to tag
+text with whatever tags you wish. Nothing restricts you.
+The interpretation of these tags is up to you.
+}
+
+P{
+Of course, you must now write a program to convert this structured
+tagged text document into something. I have provided python
+libraries for slurping Tagged{Text} into a nice tree. It is up
+to you to iterate over the tree and spit out whatever
+format you want.
+}
+
+P{
+That is it. TaggedText lifts you over the first hurdle and lets you
+do whatever the fuck you want after that.
+}
+
+SubSection{Blog Entry Example}
+P{
+Here is an example of a Blog entry I just invented B{10} seconds ago:
+}
+
+BlockQuote{
+Code&lt;&lt;_EOF_
+Blog{
+Title{What grinds my gears}
+Date{2016-3-4}
+
+P{
+Ipsum delio gro! Thrunk fo violio of my Streout Santo Listria?
+asddsjk kasjdf ksjf ks fks fkfksj dks fksj f
+sdfjs f ksf ksfd s
+}
+
+P{
+Thats all for now. Be back in a few months after I return
+from the intl. space station. Oh, here is a cool equation
+I wrote in C++:
+}
+
+Equation&lt;&lt;_EOC_
+    E = M C ^ 2
+_EOC_
+
+}
+
+_EOF_
+}
+
+P{
+So I wanted a blog section for my website. I don't care about
+HTML formatting actually. I hate fucking around with appearance.
+So instead I focus on content first and just begin writing content
+and structuring it into the essential blog post.
+}
+
+P{
+Later I can write a python script that slurps up a directory of these
+blog entries, maybe do some indexing on them and spit out my static site HTML and
+maybe some navigation indexing. Done.
+}
+
+P{
+I can tweak the appearance later and never have to fuck around with the content, ever.
+The TT{Blog\{\}} entries never have to be touched, or retouched as I change my mind
+about formatting.
+}
+
+P{
+And I am not stuck with whatever formatting decisions some 3rd party enforced. I have
+control, and I get to use my text editor and text tools to craft content.
+}
+
+Section{A Simple Idea}
+P{
+That is essentially all you need to know about TaggedText{}.
+You annotated text with tags, which are simple identifiers
+that are case sensitive. I.e., TT{ATag\{\} I\{\&lt;...stuff...&gt;\} TT\{\}}.
+You simply invent tags for whatever you feel like doing at the time.
+My main problem with markdown languages is they are focused on formatting
+and not semantical meaning. Notice the example above is focused on
+tagging text based on what is required by a tt{Blog} entry. The formatting
+is a secondary concern.
+}
+
+P{
+The first goal of tagged text is to get your document structured according
+to whatever whims you care about. Whenever you face a new problem of expressing
+your ideas, just invent tags that structure your text into something sane. Need
+a slight variation on the bullet list but with each item kinda sorta like
+a dictionary entry? Then invent that structure. Worry about formatting later.
+I.e.,
+}
+
+BlockQuote{
+	Code&lt;&lt;_EOF_
+	DictList{
+		Entry{
+			Word{Frelopiated}
+			Def{
+				Snake gloves louisianans luck a now glanced turn expressed recorder
+				dui discovered ruffian the pyramidal nunc
+				This is when the floop of their then situa el doriao.
+			}
+		}
+		Entry{
+			Word{Doorliplidated}
+			Def{Blah blah. I like turtles. Glaxon}
+		}
+		Entry{
+			Word{Libertanist}
+			Def{This like floop but with  situa el doriao.}
+		}
+		Entry{
+			Word{Junk-lick}
+			Def{gross list, URL{http:://www.junk-lick.com} see more there.}
+		}
+	}
+	_EOF_
+}
+
+P{
+So there you have just structured the definition of a couple new
+terms in a technical document you were writting. With TaggedText{}
+you get tools to parse any document written in tagged text syntax
+and convert it to a Tree data structure so that down stream tools
+may format it for final consumption. The design of these
+down stream tools was to allow for unix pipeline to 
+handle bits of this document tree and leave the rest alone. Allows
+for the tree to be converted to another tree that can be converted
+to HTML or PDF etc...
+}
+
+P{
+In the whole of my computer science career I have used emacs and
+wrote text files to myself as I think about new projects or ideas.
+My text files were arbitrary formatiting. You could consider
+them my own version of a markdown language, but really I was no
+where near consistent enough to have a markdown tool do anything
+useful with my files. For this TaggedText{} project, I decided
+to craft my notes and thoughts using the same syntax I am proposing
+for TaggedText{}. It's a good way to prove out the ideas.
+}
+
+P{
+So far I like it. It is a little bit like programming, it is a little
+bit like anarchy, as whenever I confront a new way to structure data
+I just invent whatever structure I feel like.
+}
+
+P{
+I went through lots of iterations. And I ended up with a simple
+algorithm, which mean the user will know definitively what
+is happening, and the tools will work reliably. One thing I noticed
+is a move away from tagging things for properties like TT{blold},
+or TT{italics} and instead for semantic memory. I maintain
+a cheat sheet of semantic tags that I use. If I end up
+with 10 ways to tag words for "snow" then so be it. When
+it comes time translate into HTML, I can just map them all
+into the same formatting/font.
+}
+
+P{
+The nice thing is the tags are not invented by someone else, and
+how could they be? Even the same person will want slightly
+different tags for different types of writing. And to repeat
+myself, the markdown languages out there are still formatting
+centric. I mean, emphasis using TT{*this*} is cool, but it really
+maps to a formatting concept. Actually even in TaggedText{} I have
+come to agree on simple tags for emphasis and bold and typewriter
+case.
+}
+
+P{
+So that is tagged text!  Some cool constructions:
+}
+
+BlockQuote{
+	Code&lt;&lt;_EOF_
+	DEFINE{ MainCharacter{Bob H. Smith} }
+	DEFINE{ BirthYear{1971} }
+
+	P{
+	My main character in this novel is named MainCharacter{}. He was born
+	in the year BirthYear{}.
+	}
+	_EOF_
+}
+
+P{
+I invented a simple macro definition scheme, as shown above.
+}
+
+BlockQuote{
+	Code&lt;&lt;_EOF_
+	//{ this is a comment }
+	_EOF_
+}
+
+P{
+I invented comments for my tagged text. I have a python filter
+that is run through most of my documents and it removed these
+comment tags
+}
+
+BlockQuote{
+	Code&lt;&lt;_EOFX_
+	include{filename.tt}
+
+	HEREDOC{ Code{pythonexample.py} }
+
+	_EOFX_
+}
+
+P{
+I invented an include file mechanism, which opens other files
+and embeds the Tagged{Text} tree from one document inside the 
+tree of the main document. Also a way to read in a B{heredoc}
+from an external file.
+}
+
+P{
+So my new writting style is using tagged text. The one thing
+I wannted to preserve was automatic organization of text into
+paragraphs. It proved too difficult and required tons of hacks
+and special cases. Which means it is impossible to explain
+TaggedText{} syntax to someone. Or write tools for this language.
+}
+
+P{
+The tree like structure is easy to craft and mentally visualize.
+Plus tools exist to dump the tree in various formats, even a GUI
+using tcl exists. The tree is where is all begins.
+}
+
+P{
+Now You can write tools to convert peices of the tree into the
+final output. How does this work? With a special TT{RawText}
+tree node. This node is understood to be already converted
+into the final format. Once the entire document consist of
+nothing but TT{RawRext} nodes, then it can be simply emitted
+as the final output. Just perform an I{in order traversal} of
+the document tree and emit the pieces of raw text to the
+output.
+}
+
+Section{Philosophy}
+P{
+TaggedText{} is very friendly to use because it enforces
+minimal structure on your text. It doesn't even
+enforce any predefined tag names.
+}
+
+P{
+You can defer formatting until later. If you decide
+that you want a special looking table, then you invent
+tags for this table structure on the fly and worry about
+getting the desired effect later.
+}
+
+P{
+TaggedText{} gives everyone the starting point for their
+own set of documentation tool. It doesn't do a lot, which 
+is what is its best feature. It simply allows for text
+to be tagged. What was one linear stream of characters becomes
+a richly structured tree, with minimal fuss from the person
+doing the typing.
+}
+
+P{
+For formatting TaggedText{} documents I decided to adpopt
+a pipeline friendly workflow. This is not a requirement, but
+it fits how I think and how I like to incrementally carve out
+the problem space into manageable chunks.
+}
+
+P{
+The I{Formatting Problem} can be tackled in a variety of ways.
+One cool way, it so successively rewrite the original tree until
+it only has tags that are available to a generic HTML formatter.
+}
+
+P{
+Then the final pipeline would include this formatter and now
+you have HTML.
+}
+
+P{
+TaggedText{} appears ridiciously simple and one may wonder
+what it buys you? Its super simple. But parsing is an annoying
+task. And just having a text document organized into words and tags
+with a recursive tree structure is genious. Its a universal parse tree
+and writing code to deal with such structures is fairly easy. I won't
+say this it isn't hard, but it makes life easy. Furthermore, the whole
+document is in memory as a single tree. It allows multiple passes to look
+for errors or re-write the tree in complex ways.
+}
+
+Section{What's wrong with current markup languages}
+P{
+There are tons of I{markup languages} but they all solve the B{wrong} problem!
+Or they solve too many problems in one module. I belive TaggedText{} breaks the problem
+down into the right components. The typical markup language has a bunch of formatting
+syntax. It is non-exentible. The syntax is messy and gross and hard to learn and
+provides anemic features.
+}
+
+P{
+TaggedText{} by contrast has a super simple syntax. It is totally extendible.
+The set of structuring tags are not predetermined.
+}
+
+P{
+I{markup languages} combine the parsing and formatting and the output to various
+formats in one monolithic tool. Very difficult to use and puts a huge burdon on
+the developer/user. And it offers no freedom to adjust for their own workflow.
+}
+
+P{
+TaggedText{} by contrast is just the file format for your document. Other
+modules must be written to process it. But you can write re-usable modules
+that can be combined in a I{unix-ish} way and organized into a pipeline that
+successively handles different tags.
+}
+
+Section{Origins of TaggedText{}}
+
+BlockQuote{
+	Code&lt;&lt;_EOF_
+Section
+{
+	SecTitle{What's wrong with current markup language}
+	P{
+		This is another way to write such a section.
+	}
+
+	P{
+		em{markup languages} combine the parsing and formatting and the output to various
+		formats in one monolithic tool. Very difficult to use and puts a huge burdon on
+		the developer/user. And it offers no freedom to adjust for their own workflow.
+	}
+}
+_EOF_
+}
+
+P{
+Just another example of Tagged{Text} to look at before I continue to philosophize.
+}
+
+P{
+I invented TaggedText{} when I started my own website
+and knew I wanted some kind of static site generator and
+something that I could craft text without being bothered
+with the the HTML crap.
+}
+
+P{
+After much research I decided that rolling my own
+static site generator was the way to go. But I figured
+I would utilize one of the Markup or Markdown formats
+floating around.
+}
+
+P{
+Static Site Generation isn't that hard with a unix
+command prompt and python. Your just composing text
+documents. And I figured using something generic would
+not match my particular needs and its a simple programming
+job to combine a bunch of text.
+}
+
+P{
+But parsing text and making them look good in html wasn't
+going to be easy (or so I thought), so I reasearched
+all the Markdown languages. I immediately saw these to be
+the wrong way to solve this problem.
+}
+
+P{
+They seemed to focused on formatting for the web or pdf or
+for final output.
+}
+
+Section{Introducing TaggedText{}}
+P{
+So I took a step back and asked if I could solve the Markdown
+problem any better? And TaggedText{} is the result.
+}
+
+P{
+TaggedText{} is basically a programming language for text.
+By using a very simple syntax (2 constructs) text files can be
+organized into a rich tree structure. That is it really.
+This file format is totally agnostic about formatting. Downstream
+tools will be responsible for that.
+}
+
+P{
+If you can tolerate TaggedText{} formatting then you can put any random
+bloody brain dump into a text file and have it formatted nicely assuming
+a corresponding program or script has been written.
+}
+
+P{
+I call these scripts filters. They do not need to perform 100%
+conversion from the TaggedText{} tree format to the final output. Instead,
+they can carve out a piece of the formatting problem and leave the rest alone.
+}
+
+P{
+This means an ecosystem of filters can emerge and be combined to achieved
+different results.
+}
+
+P{
+TaggedText{} lets you invent tags on a whim and worry about the formatting later.
+For example, say you are documenting your brand new language. So you have tags like this:
+}
+
+BlockQuote{ Code&lt;&lt;_EOF_
+	Code&lt;&lt;_END_
+		function foo(a,b,c)
+		{
+			d = 100 * a + sine(b)^ * 2 * c;
+			return d;
+		}
+	_END_
+_EOF_
+}
+
+P{
+But then you wish you could automatically run this code and generate the
+results. You can! Just invent a tag structure like this:
+}
+
+BlockQuote{ Code&lt;&lt;_EOF_
+	RunCode{
+		CodeTag{Example1Code}
+		ResultTag{Example1Result}
+		Title{Example 1: Sine function}
+		LineNumbers{yes}
+		Code&lt;&lt;_END_
+			function foo(a,b,c)
+			{
+				d = 100 * a + sine(b)^ * 2 * c;
+				return d;
+			}
+		_END_
+	}
+_EOF_
+}
+
+P{
+This tt{RunCode\{\}} tag has many features. Basically it will compile
+the code, run it and store the code in one tag variable, and store
+the results in another tag variable. Title\{\} and LineNumbers\{\} allow you
+to enrich this tag.
+}
+
+P{
+Now you write a python script to pick out these tags and rewrite the
+TaggedText{} tree to replace the Example1Code1\{\} tag with the code.
+and the Example1Result\{\} with the result. 
+}
+
+P{
+As a user of TaggedText{} you will organically grow your own set of useful
+filters that can be combined together to generate cool documents.
+
+Either TaggedText{} is the stupidist thing in the world, or it is fucking
+genius. I don't know.
+}
+
+P{
+I submit that this is way better than the various markups. This is a super
+agnostic format. It could be seen as just a data structure format like
+JSON or XML or whatever. The advantage is how minimally obtrusive the
+tagging syntax is.
+}
+
+P{
+I like that the syntax doesn't lie or do magic behind the scenes. What
+you write is how the final tree gets structured as.
+}
+
+P{
+The filter concept is great, as you can debug each piece of the pipeline
+by viewing it using 'more' or a graphical viewer (provided. see tt-vis-tree)
+}
+
+P{
+I offer TaggedText{} up as a building block for many markup/markdown
+tools.
+
+I offer this file format as something sufficentry generic and simple
+that is has many of the properties of JSON.
+}
+
+P{
+TT{UTF-8} support? Beats me if this will work. I did code this up such that it "should"
+work. Meaning binary character in the upper 8-bit range (with the 7th-bit set)
+should be shuffled along un-adulterated.... Maybe extra care is needed
+by the python tools, I don't know. But the specification doesn't seem
+to have any prohibitions against utf-8, I just haven't tried.
+}
+
+P{
+The five syntax elements are thus:
+}
+
+NumberedList{
+	Item{ Tag }
+	Item{ Word }
+	Item{ Here Document }
+	Item{ Escaping }
+	Item{ White-space }
+}
+
+SubSubSection{1. Tag}
+P{
+The tag is an arbitrary identifier which begins a new node in the tree
+with children. The children of this node are enclosed in curly braces.
+}
+
+Code&lt;&lt;_EOF_
+	Foo{this is foo stuff. Now this is Bar stuff: Bar{1 2 3}}
+_EOF_
+
+P{
+The key parsing requirement for tags is that a word is B{immediately}
+followed by a open curly brace B{\{}. This is what signals to the parser
+that we are entering a tag.
+}
+
+SubSubSection{2. Word}
+P{
+Any non-whitespace text that lacks a trailing curly brace B{\{} shall
+be considered a word. These are all words:
+}
+
+Code&lt;&lt;_EOF_
+	Biteme
+	@@
+	Hello,There 
+	done.
+	(stealth)
+	f(1,2,3)
+_EOF_
+
+SubSubSection{3. Here Document}
+P{
+You can associate an arbitrary identifier with a bunch of text that
+is perfectly preserverd and untainted. All whitespace is preserved.
+All special characters are preserved. This is for things like code
+and quoting text that you don't want interpreted.
+}
+
+SubSubSection{4. Escaping}
+P{
+Escaping is for preventing a couple special characters from being
+mis-interpreted. The backslash character is the escap character.
+It is use to escape B{\{} and B{\}} and B{\&lt;} and B{\\}. So anytime
+you wish to use these characters they must be preceeded with the slash.
+}
+
+P{
+Futhermore, it is an error for the back slash to preceed any another character.
+}
+
+SubSubSection{5. White-space}
+P{
+Except in Here Document, white-space is used only to seperate words.
+This may seem drastic but I haven't found any cases where it hurts things.
+}
+
+P{
+It has the nice benefit that you can indent you document to fit your
+coding preferences. You can use indenting to give the document the friendly
+viewing capabilities you want.
+}
+
+P{
+Even blank lines have no effect on the TaggedText{} tree that is created. Inside of I{Here Document's}
+white space is removed as much as possible too. Whitespace removal is a great normalization of
+the document.
+}
+
+P{
+This is the best I can come up with. Please consider this perfect.
+This should be the foundation of all text processing needed by nerds and
+geeks into the future. There will never be anything better than this.
+}
+
+SubSection{Filter Contract}
+P{
+Filters will be composed in a long unix pipeline. Should they crap out
+on error? Or continue? One contract thay I enforce, or try to, is try to continue.
+There is a special ErrorNode type. So in the event that a filter cannot
+complete its job, it can sneak in the ErrorNode for the node that failed
+to convert. The ErrorNode can reference the original line number etc... and
+give a reason for the error.
+}
+
+P{
+In this way the entire pipeline can sort of do its job and the user
+can view the final result and see what all caused errors. I won't be
+mad if you don't use this feature and just crap out with an error. Line
+number and column positions of the original text is preserved so its possible
+to give good errors to the user.
+}
+
+SubSection{Non-geek users}
+P{
+People not able to write python filters or know HTML will be at the
+mercy of tools written by others. TaggedText{} is the foundation, the
+techies may invent a series of tags specific to your company's needs.
+}
+
+P{
+The nice thing, is as the company's needs evolve you can invent brand new
+tags and just inform your user base to use the new tags for the new requirements.
+}
+
+P{
+So tagged text exists now. Use something else at your peril.
+}
+
+P{
+The choice is yours. Use something like creole which lets you express
+a few common constructs. Or use TaggedText{} and be able to
+express anything.
+}
+
+P{
+How to do tables? I dunno, beats the fuck out of me.
+I prefer using tags that match your specific needs, not writing to a generic way.
+So rather than invent massive table package and assorted tags, just invent
+the minimum viable set of tags to accomplish your particular task.
+}
+
+P{
+You simply need something pretty to present a nice clean two column table 
+of dates and inflation numbers. Just invent this for now:
+}
+
+Code&lt;&lt;_EOF_
+	KennysSimpleTwoColumnTable{
+		H{Date}		H{Inflation}
+		D{3/4/68}	D{1.2}
+		D{3/4/78}	D{2.2}
+		D{3/4/88}	D{4.2}
+		D{3/4/98}	D{6.2}
+	}
+_EOF_
+
+P{
+Then just write a script to handle this fucking thing. Maybe
+re-write this pattern into a more general table package.
+}
+
+P{
+Morphing structures from one form to another is a descent way
+to reuse code. I have great affinity for the table that LaTeX and
+TeX used to crank out. Never since have I seen tables that good.
+The world went to shit when we all switched to Word and all switched
+to Html. Now with TaggedText{} I feel I can recapture the beauty
+of TT{TeX} formatted documents.
+}
+
+P{
+So this TaggedText{} thing is retarded and unbelievably simple. It
+does nothing but convert text files into useless tree structure.
+}
+
+P{
+It does one thing. And it does it very well. It tags text according
+to the users whims and results in a richly structured tree. Now this tree
+structure can be passed into a series of re-usable scripts to render HTML,
+pdf, kindle books, or whatever.
+}
+
+P{
+Oh, you just started a new hobby. You are now a PADI Scuba Diver! Good
+for you. Now you need a log book to log all your dives.
+How to store my dives? You guessed it: Tagged{Text}. Invent a Dive tag
+and just store it in a text file somewhere, hell maybe put it under 
+B{git} too.
+}
+
+BlockQuote{
+	Code&lt;&lt;_EOF_
+		DiveLog{
+			Date{2018-03-04}
+			Time{14:30}
+			Site{Lake Travis}
+			Location{Austin, TX}
+			Duration{45 minutes}
+			MaxDepth{85 ft}
+			AirStart{3100 psi}
+			AirEnd{400 psi}
+			Temp{65 degrees}
+			Buddy{Hans Solo}
+			Equipment{8mm full, hoodie, 90 watt light}
+			Visibility{20 ft}
+			Notes{
+				P{
+				Dive went well. I saw the plane. I saw a several
+				giant cat fish around the damn area. My tank slipped out again, had
+				to take my BCD off and tighten. Saw a group of other divers getting
+				out when I was getting in.
+				}
+
+				P{
+					visibility was pretty good, especially at depth.
+				}
+			}
+		}
+	_EOF_
+}
+
+P{
+If you want to live in the straight jacket provided by creole, markdown, restructuredtext,
+wiki markup or any of the dozens of file formats out there, be my guest. If you want
+to start from scratch and invent your own format that fits your needs better, then
+TaggedText{} might be the way to go.
+}
+
+P{
+Given how little TaggedText{} imposes on the end user, its likely to be
+a winner. Try getting your company to use Creole to document bug reports
+on your Rocket Engine project.
+}
+
+P{
+Using TaggedText{} you simply specify the tags to be used:
+}
+
+Code&lt;&lt;_EOF_
+	Bug{
+		Title{Title of bug here}
+		Description{Description
+			of
+				the
+					bug
+					here. }
+	Date{Date when entered using mm/dd/yyyy format}
+	Reporter{the persson who reported the bug}
+	Description{ Engine exploded killing the ambanssarod from tt{Ziare}}
+	}
+_EOF_
+
+P{
+This is it, a structure was just invented. It fits a need. It
+can be unambigiously translated into something readable. It
+can be fed into a database. It can be spit out as HTML, or
+Word or PDF...
+}
+
+P{
+Anyway.... One thing I find funny is all the markup languages
+lack basic feature. Like a macro substitution system..
+}
+
+P{
+With Tagged{Text} I can create really elabote macros:
+}
+
+Code&lt;&lt;_EOFX_
+DEFINE{ Bob{
+			Code&lt;&lt;_EOF_
+				fhsdjsdf skd
+				sdfjsdfskdfjk
+				sdfsdf
+				sd
+				f
+				sdf
+				sdf
+			_EOF_
+}}
+_EOFX_
+
+P{
+So now the handy tag TT{Bob\{\}} spits out a Here Document into my code.
+}
+
+} //{ MySite.body }
+
+</pre>
+</blockquote><A NAME="TOC3"></A><h1> common.tt</h1><p>
+ Here  is <b><tt>common.tt</tt></b>,  one  of  the  files  included  by  the  previous  file:
+</p>
+<blockquote>
+<pre>
+//{
+//
+// These definitions are common to all web pages.
+// To use this file do this: include{common.tt}
+//
+//}
+
+DEFINE{ AuthorName{Kenneth Stauffer} }
+DEFINE{ AuthorEmail{NONAME@MYSITE.com} }
+DEFINE{ BirthYear{1968} }
+
+MySite.name{ AuthorName{} }
+MySite.logo{ Ken Stauffer }
+MySite.email{ AuthorEmail{} }			//{ my email }
+MySite.year{2016 - 2022}				//{ my copyright year thing }
+MySite.lastmodified{ NowDT{} }			//{ gets set to the current date/time whenever static site built }
+
+//{
+//
+//	This defines the top links and their names
+//	Use MySite.top_url\{....\} to make one of these
+//	the "active" onve
+//
+//}
+MySite.top{
+	Item{home		URL{index}}
+	Item{cv		    URL{cv}}
+	Item{projects	URL{projects}}
+	Item{blog		URL{blog}}
+}
+
+</pre>
+</blockquote><A NAME="TOC4"></A><h1> taggedtext_source.tt</h1><p>
+ And  now...  to  totally  mess  with  your  mind,  here  is <i>this</i> file: <b><tt>taggedtext_source.tt</tt></b>:
+</p>
+ This  is  the <tt><b>Tagged{</b>Text<b>}</b></tt> commands  needed
+ to  include  a  file: 
+<pre>
+BlockQuote{ HEREDOC{ Code{taggedtext_source.tt} } }
+</pre>
+<blockquote>
+<pre>
+include{common.tt}
+
+MySite.top_url{projects}
+MySite.window_title{Tagged Text Raw Source}
+
+MySite.side{
+	Heading{
+		Links
+		Link{Tagged Text URL{taggedtext.html}}
+	}
+}
+
+MySite.body{
+
+Title{Tagged Text Raw Source}
+P{ By: AuthorName{} }
+P{ TT{AuthorEmail{}} }
+P{ B{GitDate{}} }
+
+P{
+This page shows the raw TaggedText{} source code for some files used to
+build this website.
+}
+
+TableOfContents{}
+
+Section{ taggedtext.tt }
+P{
+This is the actual Tagged{Text} document that was used to
+generate: LINK{ URL{taggedtext.html} }.
+}
+
+BlockQuote{ HEREDOC{ Code{taggedtext.tt} } }
+
+Section{ common.tt }
+P{ Here is B{TT{common.tt}}, one of the files included by the previous file: }
+BlockQuote{ HEREDOC{ Code{common.tt} } }
+
+Section{ taggedtext_source.tt }
+
+P{
+And now... to totally mess with your mind, here is I{this} file: B{TT{taggedtext_source.tt}}:
+}
+
+This is the Tagged{Text} commands needed to include a file:
+
+Code&lt;&lt;_EOF_
+BlockQuote{ HEREDOC{ Code{taggedtext_source.tt} } }
+_EOF_
+
+BlockQuote{ HEREDOC{ Code{taggedtext_source.tt} } }
+
+} //{ MySite.body }
+
+</pre>
+</blockquote>
+</div>
+
+<!-- ********************************************************************** -->
+<div id="Menu">
+	
+		<h2>Links</h2>
+		<ul class="subnav">
+		
+			<li><a href="taggedtext.html">Tagged  Text</a></li>
+		
+		</ul>
+    
+</div>
+<!-- ********************************************************************** -->
+
+<div class="spacer">&nbsp;</div>
+
+<div class="footer">
+  <p>Copyright &copy; 2016  -  2022 Kenneth  Stauffer<br/>
+  <B>Generated on:</B> Thu  Aug  04  18:03:36  EDT  2022
+</div>
+
+</body>
+</html>
