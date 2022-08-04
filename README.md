@@ -1,5 +1,5 @@
 # tagged_text
-Agnostic Markdown Tagged{Text} and static site generator. I wrote this in 2016 for my personal website.
+Agnostic Markdown Tagged{Text} and static site generator. I wrote this in 2016 for my personal website. [http://www.etcutmp.com]
 
 # Introduction
 The Tagged{Text} markdown format is described here. The python code to process such files is in taggedtext.py.
