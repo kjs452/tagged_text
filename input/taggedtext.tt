@@ -21,8 +21,8 @@ TableOfContents{}
 
 Section{Introduction}
 P{
-In the following pages I intend to describe my invention I named Tagged{Text}.
-This is a very simple file format for organizing text documents.
+Here is a description of Tagged{Text},
+a very simple file format for organizing text documents.
 }
 
 P{ B{NOTE:} This website was constructed using Tagged{Text}. To the see the source
@@ -114,38 +114,15 @@ and TT{_EOF_} will be part of the B{heredoc}.
 
 Section{Why use Tagged{Text}?}
 P{
-I invented Tagged{Text} so that I could markup my website with tags of my own choosing, and then
-craft python scripts which would translate this markup into my static website. I wanted a format
-which was easy to use and remember, and did not enforce any rules and define any meaning to
-markup tags I would invent.
-}
-
-P{
-I looked a TT{YAML}, TT{Markdown}, TT{asciidoc}, TT{html}, TT{xml}, TT{yodl}, TT{s-expressions}
-and many other solutions. They all suffered from several problems:
-}
-
-NumberedList{
-	Item{
-		LH{Funky complicated syntax}
-	}
-
-	Item{
-		LH{Predefined structural elements}
-	}
-
-	Item{
-		LH{Forced to use software which I have no control over}
-	}
-
+It is an agnostic markup format, it can be used to form a basis for documents in a static website generator. The
+author would custom craft python scripts to translate their markup tags into their website.
+Agnostic means the Tagged{Text} does not enforce any rules or define any meaning to markup tags.
 }
 
 P{
 I always like the syntax of TeX and LaTeX from my college days. So I designed Tagged{Text} to have a
 syntax that reminds me of TeX. Tagged{Text} in my opinion is the simplest file format one can have
-to structure a text document and not be over burdnoned with gross syntactic elements. B{XML} would have
-been a good choice, except the angled bracket tax one must pay to use it. Plus all the gross boiler plate
-pre-amble stuff which is incomprehensible to me.
+to structure a text document and not be over burdnoned with gross syntactic elements.
 }
 
 P{
@@ -154,84 +131,9 @@ for computer programs to handle. The recursive solutions that emerge are very cl
 about.
 }
 
-Section{White-space}
-P{
-One of the bolder decisions I made was to totally strip white-space from the document. White-space was
-only used to break the document into words, tags, etc.... As a long time compiler writer, I appreciated
-the cleansing effect that ignoring white space can have for a parser. The same goes with Tagged{Text}. I
-thought it would cause lots of problems, but it turns out it is a very clean way to process a document.
-}
-
-P{
-Removing white-space is good, therefore. And I just wanted to I{emphasize} this fact with its own section!
-}
-
-Section{The Problem With Markdown Languages}
-P{
-In this section I propose a better solution to the problem of
-turning text documents into something that looks good in various
-formats.
-}
-
-P{
-Markdown/Markup language let you type text in an editor and get a decent
-looking document when published on the web or a pdf document.
-}
-
-P{
-Markup or Markdown or whatever you want to call them are
-all around.
-}
-
-BulletList{
-Item{Markdown}
-Item{Git Flavored Markdown}
-Item{Asciidoc}
-Item{Creole}
-}
-
-P{
-See more at: LINK{URL{https://en.wikipedia.org/wiki/List_of_lightweight_markup_languages}}.
-}
-
-P{
-The problem with each and every one of them is they enforce
-the concepts on your text. They control how you must craft your
-text document. Further these rules control how the fucking thing will
-appear when converted to HTML.
-}
-
-P{
-What is wrong with these systems is you must learn their markup
-syntax. You must hunt through the possibilities to hope to get
-a document you are happy with. You are also limited to whatever
-they decided to offer.
-}
-
-P{
-I propose a new thing. It is not markup or markdown or whatever
-you want to call it. This new thing, I call Tagged{Text}.
-You write text as normal, but you follow a simple rule to tag
-text with whatever tags you wish. Nothing restricts you.
-The interpretation of these tags is up to you.
-}
-
-P{
-Of course, you must now write a program to convert this structured
-tagged text document into something. I have provided python
-libraries for slurping Tagged{Text} into a nice tree. It is up
-to you to iterate over the tree and spit out whatever
-format you want.
-}
-
-P{
-That is it. TaggedText lifts you over the first hurdle and lets you
-do whatever the fuck you want after that.
-}
-
 SubSection{Blog Entry Example}
 P{
-Here is an example of a Blog entry I just invented B{10} seconds ago:
+Here is an example of a Blog entry:
 }
 
 BlockQuote{
@@ -262,30 +164,18 @@ _EOF_
 }
 
 P{
-So I wanted a blog section for my website. I don't care about
-HTML formatting actually. I hate fucking around with appearance.
-So instead I focus on content first and just begin writing content
-and structuring it into the essential blog post.
+This could form the basis of content for a blog section in a website.
+At this stage you don't care about HTML formatting. Instead focusing on content first.
+A tool, you must write, would format these entries into HTML or whatever format you want.
 }
 
 P{
-Later I can write a python script that slurps up a directory of these
-blog entries, maybe do some indexing on them and spit out my static site HTML and
-maybe some navigation indexing. Done.
-}
-
-P{
-I can tweak the appearance later and never have to fuck around with the content, ever.
-The TT{Blog\{\}} entries never have to be touched, or retouched as I change my mind
+The appearance can be tweaked later and never have to concenred with the content when playing around
+with the appearance. The TT{Blog\{\}} entries never have to be touched, or retouched as you change your mind
 about formatting.
 }
 
-P{
-And I am not stuck with whatever formatting decisions some 3rd party enforced. I have
-control, and I get to use my text editor and text tools to craft content.
-}
-
-Section{A Simple Idea}
+Section{Summary}
 P{
 That is essentially all you need to know about TaggedText{}.
 You annotated text with tags, which are simple identifiers
@@ -299,7 +189,7 @@ is a secondary concern.
 
 P{
 The first goal of tagged text is to get your document structured according
-to whatever whims you care about. Whenever you face a new problem of expressing
+to whatever organizing tags you care about. Whenever you face a new problem of expressing
 your ideas, just invent tags that structure your text into something sane. Need
 a slight variation on the bullet list but with each item kinda sorta like
 a dictionary entry? Then invent that structure. Worry about formatting later.
@@ -334,59 +224,7 @@ BlockQuote{
 }
 
 P{
-So there you have just structured the definition of a couple new
-terms in a technical document you were writting. With TaggedText{}
-you get tools to parse any document written in tagged text syntax
-and convert it to a Tree data structure so that down stream tools
-may format it for final consumption. The design of these
-down stream tools was to allow for unix pipeline to 
-handle bits of this document tree and leave the rest alone. Allows
-for the tree to be converted to another tree that can be converted
-to HTML or PDF etc...
-}
-
-P{
-In the whole of my computer science career I have used emacs and
-wrote text files to myself as I think about new projects or ideas.
-My text files were arbitrary formatiting. You could consider
-them my own version of a markdown language, but really I was no
-where near consistent enough to have a markdown tool do anything
-useful with my files. For this TaggedText{} project, I decided
-to craft my notes and thoughts using the same syntax I am proposing
-for TaggedText{}. It's a good way to prove out the ideas.
-}
-
-P{
-So far I like it. It is a little bit like programming, it is a little
-bit like anarchy, as whenever I confront a new way to structure data
-I just invent whatever structure I feel like.
-}
-
-P{
-I went through lots of iterations. And I ended up with a simple
-algorithm, which mean the user will know definitively what
-is happening, and the tools will work reliably. One thing I noticed
-is a move away from tagging things for properties like TT{blold},
-or TT{italics} and instead for semantic memory. I maintain
-a cheat sheet of semantic tags that I use. If I end up
-with 10 ways to tag words for "snow" then so be it. When
-it comes time translate into HTML, I can just map them all
-into the same formatting/font.
-}
-
-P{
-The nice thing is the tags are not invented by someone else, and
-how could they be? Even the same person will want slightly
-different tags for different types of writing. And to repeat
-myself, the markdown languages out there are still formatting
-centric. I mean, emphasis using TT{*this*} is cool, but it really
-maps to a formatting concept. Actually even in TaggedText{} I have
-come to agree on simple tags for emphasis and bold and typewriter
-case.
-}
-
-P{
-So that is tagged text!  Some cool constructions:
+Some interesting constructions:
 }
 
 BlockQuote{
@@ -402,7 +240,7 @@ BlockQuote{
 }
 
 P{
-I invented a simple macro definition scheme, as shown above.
+A simple macro definition scheme, as shown above.
 }
 
 BlockQuote{
@@ -412,9 +250,9 @@ BlockQuote{
 }
 
 P{
-I invented comments for my tagged text. I have a python filter
+A scheme for comments. I wrote a python filter
 that is run through most of my documents and it removed these
-comment tags
+comment tags.
 }
 
 BlockQuote{
@@ -434,14 +272,6 @@ from an external file.
 }
 
 P{
-So my new writting style is using tagged text. The one thing
-I wannted to preserve was automatic organization of text into
-paragraphs. It proved too difficult and required tons of hacks
-and special cases. Which means it is impossible to explain
-TaggedText{} syntax to someone. Or write tools for this language.
-}
-
-P{
 The tree like structure is easy to craft and mentally visualize.
 Plus tools exist to dump the tree in various formats, even a GUI
 using tcl exists. The tree is where is all begins.
@@ -458,36 +288,6 @@ the document tree and emit the pieces of raw text to the
 output.
 }
 
-Section{Philosophy}
-P{
-TaggedText{} is very friendly to use because it enforces
-minimal structure on your text. It doesn't even
-enforce any predefined tag names.
-}
-
-P{
-You can defer formatting until later. If you decide
-that you want a special looking table, then you invent
-tags for this table structure on the fly and worry about
-getting the desired effect later.
-}
-
-P{
-TaggedText{} gives everyone the starting point for their
-own set of documentation tool. It doesn't do a lot, which 
-is what is its best feature. It simply allows for text
-to be tagged. What was one linear stream of characters becomes
-a richly structured tree, with minimal fuss from the person
-doing the typing.
-}
-
-P{
-For formatting TaggedText{} documents I decided to adpopt
-a pipeline friendly workflow. This is not a requirement, but
-it fits how I think and how I like to incrementally carve out
-the problem space into manageable chunks.
-}
-
 P{
 The I{Formatting Problem} can be tackled in a variety of ways.
 One cool way, it so successively rewrite the original tree until
@@ -500,119 +300,11 @@ you have HTML.
 }
 
 P{
-TaggedText{} appears ridiciously simple and one may wonder
-what it buys you? Its super simple. But parsing is an annoying
-task. And just having a text document organized into words and tags
-with a recursive tree structure is genious. Its a universal parse tree
-and writing code to deal with such structures is fairly easy. I won't
-say this it isn't hard, but it makes life easy. Furthermore, the whole
-document is in memory as a single tree. It allows multiple passes to look
-for errors or re-write the tree in complex ways.
-}
-
-Section{What's wrong with current markup languages}
-P{
-There are tons of I{markup languages} but they all solve the B{wrong} problem!
-Or they solve too many problems in one module. I belive TaggedText{} breaks the problem
-down into the right components. The typical markup language has a bunch of formatting
-syntax. It is non-exentible. The syntax is messy and gross and hard to learn and
-provides anemic features.
-}
-
-P{
-TaggedText{} by contrast has a super simple syntax. It is totally extendible.
-The set of structuring tags are not predetermined.
-}
-
-P{
-I{markup languages} combine the parsing and formatting and the output to various
-formats in one monolithic tool. Very difficult to use and puts a huge burdon on
-the developer/user. And it offers no freedom to adjust for their own workflow.
-}
-
-P{
-TaggedText{} by contrast is just the file format for your document. Other
-modules must be written to process it. But you can write re-usable modules
-that can be combined in a I{unix-ish} way and organized into a pipeline that
-successively handles different tags.
-}
-
-Section{Origins of TaggedText{}}
-
-BlockQuote{
-	Code<<_EOF_
-Section
-{
-	SecTitle{What's wrong with current markup language}
-	P{
-		This is another way to write such a section.
-	}
-
-	P{
-		em{markup languages} combine the parsing and formatting and the output to various
-		formats in one monolithic tool. Very difficult to use and puts a huge burdon on
-		the developer/user. And it offers no freedom to adjust for their own workflow.
-	}
-}
-_EOF_
-}
-
-P{
-Just another example of Tagged{Text} to look at before I continue to philosophize.
-}
-
-P{
-I invented TaggedText{} when I started my own website
-and knew I wanted some kind of static site generator and
-something that I could craft text without being bothered
-with the the HTML crap.
-}
-
-P{
-After much research I decided that rolling my own
-static site generator was the way to go. But I figured
-I would utilize one of the Markup or Markdown formats
-floating around.
-}
-
-P{
-Static Site Generation isn't that hard with a unix
-command prompt and python. Your just composing text
-documents. And I figured using something generic would
-not match my particular needs and its a simple programming
-job to combine a bunch of text.
-}
-
-P{
-But parsing text and making them look good in html wasn't
-going to be easy (or so I thought), so I reasearched
-all the Markdown languages. I immediately saw these to be
-the wrong way to solve this problem.
-}
-
-P{
-They seemed to focused on formatting for the web or pdf or
-for final output.
-}
-
-Section{Introducing TaggedText{}}
-P{
-So I took a step back and asked if I could solve the Markdown
-problem any better? And TaggedText{} is the result.
-}
-
-P{
 TaggedText{} is basically a programming language for text.
 By using a very simple syntax (2 constructs) text files can be
 organized into a rich tree structure. That is it really.
 This file format is totally agnostic about formatting. Downstream
 tools will be responsible for that.
-}
-
-P{
-If you can tolerate TaggedText{} formatting then you can put any random
-bloody brain dump into a text file and have it formatted nicely assuming
-a corresponding program or script has been written.
 }
 
 P{
@@ -686,40 +378,12 @@ genius. I don't know.
 }
 
 P{
-I submit that this is way better than the various markups. This is a super
-agnostic format. It could be seen as just a data structure format like
-JSON or XML or whatever. The advantage is how minimally obtrusive the
-tagging syntax is.
-}
-
-P{
-I like that the syntax doesn't lie or do magic behind the scenes. What
-you write is how the final tree gets structured as.
-}
-
-P{
 The filter concept is great, as you can debug each piece of the pipeline
 by viewing it using 'more' or a graphical viewer (provided. see tt-vis-tree)
 }
 
 P{
-I offer TaggedText{} up as a building block for many markup/markdown
-tools.
-
-I offer this file format as something sufficentry generic and simple
-that is has many of the properties of JSON.
-}
-
-P{
-TT{UTF-8} support? Beats me if this will work. I did code this up such that it "should"
-work. Meaning binary character in the upper 8-bit range (with the 7th-bit set)
-should be shuffled along un-adulterated.... Maybe extra care is needed
-by the python tools, I don't know. But the specification doesn't seem
-to have any prohibitions against utf-8, I just haven't tried.
-}
-
-P{
-The five syntax elements are thus:
+The five syntax elements of Tagged{Text} are:
 }
 
 NumberedList{
@@ -800,53 +464,7 @@ the document.
 }
 
 P{
-This is the best I can come up with. Please consider this perfect.
-This should be the foundation of all text processing needed by nerds and
-geeks into the future. There will never be anything better than this.
-}
-
-SubSection{Filter Contract}
-P{
-Filters will be composed in a long unix pipeline. Should they crap out
-on error? Or continue? One contract thay I enforce, or try to, is try to continue.
-There is a special ErrorNode type. So in the event that a filter cannot
-complete its job, it can sneak in the ErrorNode for the node that failed
-to convert. The ErrorNode can reference the original line number etc... and
-give a reason for the error.
-}
-
-P{
-In this way the entire pipeline can sort of do its job and the user
-can view the final result and see what all caused errors. I won't be
-mad if you don't use this feature and just crap out with an error. Line
-number and column positions of the original text is preserved so its possible
-to give good errors to the user.
-}
-
-SubSection{Non-geek users}
-P{
-People not able to write python filters or know HTML will be at the
-mercy of tools written by others. TaggedText{} is the foundation, the
-techies may invent a series of tags specific to your company's needs.
-}
-
-P{
-The nice thing, is as the company's needs evolve you can invent brand new
-tags and just inform your user base to use the new tags for the new requirements.
-}
-
-P{
-So tagged text exists now. Use something else at your peril.
-}
-
-P{
-The choice is yours. Use something like creole which lets you express
-a few common constructs. Or use TaggedText{} and be able to
-express anything.
-}
-
-P{
-How to do tables? I dunno, beats the fuck out of me.
+How to do tables?
 I prefer using tags that match your specific needs, not writing to a generic way.
 So rather than invent massive table package and assorted tags, just invent
 the minimum viable set of tags to accomplish your particular task.
@@ -868,37 +486,8 @@ Code<<_EOF_
 _EOF_
 
 P{
-Then just write a script to handle this fucking thing. Maybe
-re-write this pattern into a more general table package.
-}
-
-P{
-Morphing structures from one form to another is a descent way
-to reuse code. I have great affinity for the table that LaTeX and
-TeX used to crank out. Never since have I seen tables that good.
-The world went to shit when we all switched to Word and all switched
-to Html. Now with TaggedText{} I feel I can recapture the beauty
-of TT{TeX} formatted documents.
-}
-
-P{
-So this TaggedText{} thing is retarded and unbelievably simple. It
-does nothing but convert text files into useless tree structure.
-}
-
-P{
-It does one thing. And it does it very well. It tags text according
-to the users whims and results in a richly structured tree. Now this tree
-structure can be passed into a series of re-usable scripts to render HTML,
-pdf, kindle books, or whatever.
-}
-
-P{
-Oh, you just started a new hobby. You are now a PADI Scuba Diver! Good
-for you. Now you need a log book to log all your dives.
-How to store my dives? You guessed it: Tagged{Text}. Invent a Dive tag
-and just store it in a text file somewhere, hell maybe put it under 
-B{git} too.
+Another example, one might wish to invent tags like this to keep track
+of all your dives in  text database, then use python to format it nicely for the web.
 }
 
 BlockQuote{
@@ -930,49 +519,6 @@ BlockQuote{
 			}
 		}
 	_EOF_
-}
-
-P{
-If you want to live in the straight jacket provided by creole, markdown, restructuredtext,
-wiki markup or any of the dozens of file formats out there, be my guest. If you want
-to start from scratch and invent your own format that fits your needs better, then
-TaggedText{} might be the way to go.
-}
-
-P{
-Given how little TaggedText{} imposes on the end user, its likely to be
-a winner. Try getting your company to use Creole to document bug reports
-on your Rocket Engine project.
-}
-
-P{
-Using TaggedText{} you simply specify the tags to be used:
-}
-
-Code<<_EOF_
-	Bug{
-		Title{Title of bug here}
-		Description{Description
-			of
-				the
-					bug
-					here. }
-	Date{Date when entered using mm/dd/yyyy format}
-	Reporter{the persson who reported the bug}
-	Description{ Engine exploded killing the ambanssarod from tt{Ziare}}
-	}
-_EOF_
-
-P{
-This is it, a structure was just invented. It fits a need. It
-can be unambigiously translated into something readable. It
-can be fed into a database. It can be spit out as HTML, or
-Word or PDF...
-}
-
-P{
-Anyway.... One thing I find funny is all the markup languages
-lack basic feature. Like a macro substitution system..
 }
 
 P{
