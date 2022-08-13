@@ -3,12 +3,16 @@ include{headline.tt}
 Blog{
 Title{New Entry}
 Date{8/13/2022}
-P{
-Here is a random headline: TT{ B{ Head_Line{} } }.
-Here is the GIT Date of this blog entry: B{ GitDate{} }.
-Here is 4501.909 / 7.095: B{ Calculate{ 4501.909 / 7.095 Prec{5} } }.
+BulletList{
+Item{
+	Here is a random headline: TT{ B{ Head_Line{} } }.
 }
-
+Item{
+	Here is the GIT Date of this blog entry: B{ GitDate{} }.
+}
+Item{
+	Here is 4501.909 / 7.095: B{ Calculate{ 4501.909 / 7.095 Prec{5} } }.
+}}
 }
 
 Blog{
