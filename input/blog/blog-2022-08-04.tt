@@ -5,8 +5,8 @@ Title{New Entry}
 Date{8/13/2022}
 P{
 Here is a random headline: TT{ B{ Head_Line{} } }.
-Here is the GIT Date of this blog entry: GitDate{}.
-Here is 45.900 / 7.009: B{ Calculate{ 45.900 / 7.009 } }.
+Here is the GIT Date of this blog entry: B{ GitDate{} }.
+Here is 4501.909 / 7.095: B{ Calculate{ 4501.909 / 7.095 Prec{5} } }.
 }
 
 }
