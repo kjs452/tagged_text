@@ -96,8 +96,7 @@ I always liked the appearance of TeX and LaTeX while editing them, so
 Tagged{Text} was made to look similar:
 
 ```
-%{ This is a simple sample document.  For more 
-documents take a look in the exercise tab. Note that everything that
+%{ This is a simple sample document. Note that everything that
 comes after a % symbol is treated as comment and ignored when the
 code is compiled. }
 
