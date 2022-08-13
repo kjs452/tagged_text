@@ -52,10 +52,9 @@ This diagram shows how the tagged{text} example above was parsed into a tree:
 
 Here is a LaTeX document with comments:
 ```
-% This is a simple sample document.  For more 
-documents take a look in the exercise tab. Note that everything that
-comes after a % symbol is treated as comment and ignored when the
-code is compiled.
+% This is a simple sample document. Note that everything that
+% comes after a % symbol is treated as comment and ignored when the
+% code is compiled.
 
 \documentclass{article}
 
@@ -118,7 +117,7 @@ section{Hello World!}
     
 textbf{Hello World!} Today I am learning LaTeX{}.
 LaTeX{} is a great program for writing math. I can write in
-line math such as $${a^2+b^2=c^2} %{ tells LaTeX to compile as math.}
+line math such as $${a^2+b^2=c^2} %{ $ tells LaTeX to compile as math.}
 I can also give equations their own space: 
 
 equation<<END
