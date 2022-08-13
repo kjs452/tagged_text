@@ -118,7 +118,7 @@ section{Hello World!}
     
 textbf{Hello World!} Today I am learning LaTeX{}.
 LaTeX{} is a great program for writing math. I can write in
-line math such as $${a^2+b^2=c^2$ %{ tells LaTexX to compile as math.}
+line math such as $${a^2+b^2=c^2} %{ tells LaTeX to compile as math.}
 I can also give equations their own space: 
 
 equation<<END
