@@ -48,4 +48,92 @@ This diagram shows how the tagged{text} example above was parsed into a tree:
 
 !["TaggedText Tree"](https://github.com/kjs452/tagged_text/blob/main/doc/tt_tree10.png "TaggedText Tree")
 
+## LaTeX vs Tagged{Text}
 
+Here is a LaTeX document with comments:
+```
+% This is a simple sample document.  For more 
+documents take a look in the exercise tab. Note that everything that
+comes after a % symbol is treated as comment and ignored when the
+code is compiled.
+
+\documentclass{article}
+
+\usepackage{amsmath}
+
+\title{Simple Sample}
+\author{My Name}
+\date{\today}
+
+% The preamble ends with the command \begin{document}
+\begin{document}
+\maketitle
+    
+\section{Hello World!}
+    
+\textbf{Hello World!} Today I am learning \LaTeX.
+\LaTeX{} is a great program for writing math. I can write in
+line math such as $a^2+b^2=c^2$ %$ tells LaTexX to compile as math.
+I can also give equations their own space: 
+
+\begin{equation}
+        \gamma^2+\theta^2=\omega^2
+\end{equation}
+
+If I do not leave any blank lines \LaTeX{} will continue  this
+text without making it into a new paragraph.  Notice how there
+was no indentation in the text after equation (1).  
+Also notice how even though I hit enter after that sentence and
+here $\downarrow$
+\LaTeX{} formats the sentence without any break.  Also   look
+how      it   doesn't     matter          how    many  spaces     I
+put     between       my    words.
+For a new paragraph I can leave a blank space in my code. 
+
+\end{document}
+```
+
+I always liked the appearance of TeX and LaTeX while editing them, so
+Tagged{Text} was made to look similar:
+
+```
+%{ This is a simple sample document.  For more 
+documents take a look in the exercise tab. Note that everything that
+comes after a % symbol is treated as comment and ignored when the
+code is compiled. }
+
+documentclass{article}
+
+usepackage{amsmath}
+
+title{Simple Sample}
+author{My Name}
+date{today{}}
+
+%{ The preamble ends with the command begin{document} }
+begin{document}
+maketitle{}
+    
+section{Hello World!}
+    
+textbf{Hello World!} Today I am learning LaTeX{}.
+LaTeX{} is a great program for writing math. I can write in
+line math such as $${a^2+b^2=c^2$ %{ tells LaTexX to compile as math.}
+I can also give equations their own space: 
+
+equation<<END
+    gamma^2+theta^2=omega^2
+END
+
+If I do not leave any blank lines LaTeX{} will continue  this
+text without making it into a new paragraph.  Notice how there
+was no indentation in the text after equation (1).  
+Also notice how even though I hit enter after that sentence and
+here $${downarrow}
+LaTeX{} formats the sentence without any break.  Also   look
+how      it   doesn't     matter          how    many  spaces     I
+put     between       my    words.
+For a new paragraph I can leave a blank space in my code. 
+
+end{document}
+```
