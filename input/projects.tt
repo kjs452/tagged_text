@@ -22,8 +22,10 @@ format which is used to produce this website. I wrote up some
 notes on it here: LINK{Tagged Text URL{taggedtext.html}}.
 
 Section{Evolve 4.0}
-Somebody resurrected my artificual life simulator. It is a windows GUI application.
+This project is an Artificial Life simulator. I was inspired to develop this after
+reading Richard Dawkins book, The Blind Watchmaker.
 A wonderful person resurrected my artificial life simulator:
 LINK{ URL{https://rubberduck203.github.io/Evolve/index.html} }
+
 
 } //{ MySite.body }
