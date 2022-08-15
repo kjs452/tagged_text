@@ -23,8 +23,9 @@ format which is used to produce this website. I wrote up some
 notes on it here: LINK{Tagged Text URL{taggedtext.html}}.
 }
 
-P{
+
 Section{Evolve 4.0}
+P{
 This project is an Artificial Life simulator. I was inspired to develop this after
 reading Richard Dawkins book, The Blind Watchmaker.
 A wonderful person resurrected my artificial life simulator:
