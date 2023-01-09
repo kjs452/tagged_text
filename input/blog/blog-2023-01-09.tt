@@ -1,0 +1,9 @@
+include{headline.tt}
+
+Blog{
+Title{Happy New Year}
+Date{1/9/2023}
+P{
+I am looking forward to the new year. I hope everyone out there achieves their goals.
+}
+}
