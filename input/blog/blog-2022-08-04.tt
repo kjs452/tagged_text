@@ -1,6 +1,33 @@
 include{headline.tt}
 
 Blog{
+Title{Cones of Dunshire}
+Date{12/13/2022}
+P{
+A really great game is 'Cones of Dunshire'. Ha ha ha ha. I suspsect a lot of such games are
+being created. There appears to be T-shirts and a board game based on the name.
+}
+}
+
+Blog{
+Title{Evolve 5.0}
+Date{12/12/2022}
+P{
+I am porting Evolve 4.0 to MacOS. Here is a website LINK{ URL{http://www.etcutmp.com/evolve5} }.
+I am excited about this. I am like super excited. For 12 years I have not been able to play this simulation.
+I simply let the code rot and didn't have a windows machine. Well, now I have re-created evolve in a much
+more enjoyable application. It will be a very welcome thing to experiment with.
+}
+
+P{
+I am interested in sharing
+this and getting the old Alife community back together again. I lurk on all the various forums
+and video channels. I am excited to share something new to the community of fellow ALIFE Weirdo's.
+}
+
+}
+
+Blog{
 Title{Interesting Tags}
 Date{8/13/2022}
 P{

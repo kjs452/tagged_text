@@ -12,7 +12,7 @@ DEFINE{ BirthYear{1968} }
 MySite.name{ AuthorName{} }
 MySite.logo{ Ken Stauffer }
 MySite.email{ AuthorEmail{} }			//{ my email }
-MySite.year{2016 - 2022}				//{ my copyright year thing }
+MySite.year{2016 - 2023}				//{ my copyright year thing }
 MySite.lastmodified{ NowDT{} }			//{ gets set to the current date/time whenever static site built }
 
 //{

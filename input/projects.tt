@@ -23,14 +23,11 @@ format which is used to produce this website. I wrote up some
 notes on it here: LINK{Tagged Text URL{taggedtext.html}}.
 }
 
-
-Section{Evolve 4.0}
+Section{Evolve 5.0}
 P{
-This project is an Artificial Life simulator. I was inspired to develop this after
+This project is an Artificial Life Simulator. I was inspired to develop this after
 reading Richard Dawkins book, The Blind Watchmaker.
-A wonderful person resurrected my artificial life simulator:
-LINK{ URL{https://rubberduck203.github.io/Evolve/index.html} }
+Here's the link: LINK{ URL{https://etcutmp.com/evolve5} }
 }
-
 
 } //{ MySite.body }

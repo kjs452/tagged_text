@@ -98,14 +98,13 @@ IMGC{images/tt_tree10.png}
 
 P{
 This diagram shows a tree representing the example document. Tagged{Text} documents are always given a TT{root}
-node. Each node can have zero or more children. Well, B{word} nodes and B{heredoc} nodes don't have children --these are
-considered leaf nodes. The order of the children is the order in which they appear in the file. I{Tags} introduce new
+node. Each node can have zero or more children. The order of the children is the order in which they appear in the file. I{Tags} introduce new
 nodes which can have children. I{Words} and I{Heredocs} do not have children.
 }
 
 P{
 A heredoc ( TT{Code} in this example) consists of the entire block of text that was given. The programming
-API should make this text available as a list of text lines. Common whitespace (spaces and tabs) are removed
+API makes this text available as a list of text lines. Common whitespace (spaces and tabs) are removed
 from the I{heredoc}. Trailing whitespace is also trimmed. This allows heredocs to be indented in you document for
 ease of reading. A B{heredoc} uses a delimiter which is _EOF_ in this example. Any text can be used, which
 will not be part of the text you want to include in the heredoc. All lines of text between TT{Code\<\<_EOF_}
@@ -373,8 +372,6 @@ P{
 As a user of TaggedText{} you will organically grow your own set of useful
 filters that can be combined together to generate cool documents.
 
-Either TaggedText{} is the stupidist thing in the world, or it is fucking
-genius. I don't know.
 }
 
 P{
@@ -382,6 +379,21 @@ The filter concept is great, as you can debug each piece of the pipeline
 by viewing it using 'more' or a graphical viewer (provided. see tt-vis-tree)
 }
 
+Section{Cheat Sheet}
+P{
+Here I document all the tags I have use for this website. The python code for
+these tags is given also.
+}
+
+//{ ********************************************************************** }
+BlockQuote{
+	Code<<_EOF_
+	Simple Tags
+	This is B{bold}, I{Italics}, And so on...
+_EOF_
+}
+
+Section{Tagged Text File Format}
 P{
 The five syntax elements of Tagged{Text} are:
 }

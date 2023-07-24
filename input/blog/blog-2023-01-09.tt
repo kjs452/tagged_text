@@ -4,6 +4,28 @@ Blog{
 Title{Happy New Year}
 Date{1/9/2023}
 P{
-I am looking forward to the new year. I hope everyone out there achieves their goals.
+I'm working on Evolve 5.0. I plan to release by the end of this month.
+There is a version on the apple app store (called Evolve4) which you can take a gander at.
 }
+}
+
+Blog{
+Title{Update}
+Date{7/24/2023}
+P{
+This is just an update to indicate I am still active. I am working a new contracting job, so I am
+not going to be working on B{Evolve 5.0} as much. I am thinking of reducing the price of the Evolve application
+on the apple app store. From B{$20} to much less, or free. Maybe B{$5.00}.
+}
+
+P{
+I am still running long term simulations, which I upload to my LINK{github URL{https://github.com/kjs452} } page.
+}
+
+P{
+Here is a picture of me and my sister, when she came to visit me in NYC.
+}
+
+IMGC{photos/kendeb.jpg}
+
 }
